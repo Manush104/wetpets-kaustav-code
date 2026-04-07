@@ -76,6 +76,6 @@ const featured = products.filter(p => p.inStock).slice(0, 4);
   }
 
   @media (max-width: 560px) {
-    .featured-grid { grid-template-columns: 1fr; }
+    .featured-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
   }
 </style>

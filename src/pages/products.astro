@@ -277,14 +277,16 @@ const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
   }
 
   @media (max-width: 768px) {
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    .cat-card { min-width: 120px; padding: var(--sp-3) var(--sp-4); }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+    .cat-card { min-width: 100px; min-height: 75px; padding: var(--sp-2) var(--sp-3); }
+    .cat-card__label { font-size: 10px; }
+    .cat-card__count { font-size: 9px; }
+    .sub-filter-btn { padding: var(--sp-1) var(--sp-3); font-size: 10px; }
   }
 
   @media (max-width: 480px) {
     .products-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: var(--sp-2);
+        gap: var(--sp-1);
     }
   }
 </style>
