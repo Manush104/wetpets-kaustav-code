@@ -1,0 +1,150 @@
+---
+const reviews = [
+  {
+    name: 'Verified Customer',
+    text: 'Has a lot of varieties of ornamental fishes. Always has stock of whatever you need. The owner is very friendly and never disappoints in fulfilling your needs of any aquarium products. A must visit place.',
+    rating: 5,
+    source: 'Google Review',
+    initials: 'VC',
+  },
+  {
+    name: 'Aquarium Enthusiast',
+    text: 'Great selection of fish and very competitive pricing. Found species here that I couldn\'t find anywhere else in the city. The owner really knows his stuff.',
+    rating: 5,
+    source: 'Google Review',
+    initials: 'AE',
+  },
+  {
+    name: 'Happy Customer',
+    text: 'Open 24 hours — which is incredibly convenient. Good quality fish and fair prices. The shop has a wide range of accessories too.',
+    rating: 4,
+    source: 'Google Review',
+    initials: 'HC',
+  },
+  {
+    name: 'Regular Buyer',
+    text: 'Been buying from Wet Pets for a while now. They always have healthy fish and the owner is happy to give advice on tank setup and maintenance.',
+    rating: 5,
+    source: 'Google Review',
+    initials: 'RB',
+  },
+];
+---
+
+<section class="reviews section" id="reviews">
+  <div class="container">
+    <div class="section-header section-header--center reveal">
+      <p class="label">Testimonials</p>
+      <div class="divider"></div>
+      <h2 class="h2">What Our Customers Say</h2>
+      <p>Rated 4.0 on Google — trusted by aquarium enthusiasts across Kolkata.</p>
+    </div>
+
+    <div class="reviews__grid">
+      {reviews.map((r, i) => (
+        <article class={`reviews__card reveal${i % 2 === 1 ? ' reveal-delay-1' : ''}`}>
+          <div class="reviews__stars" aria-label={`${r.rating} out of 5 stars`}>
+            {Array.from({ length: 5 }).map((_, si) => (
+              <span class={`reviews__star${si < r.rating ? ' filled' : ''}`}>★</span>
+            ))}
+          </div>
+          <blockquote class="reviews__quote">{r.text}</blockquote>
+          <footer class="reviews__author">
+            <div class="reviews__avatar">{r.initials}</div>
+            <div>
+              <p class="reviews__name">{r.name}</p>
+              <p class="reviews__src">{r.source}</p>
+            </div>
+          </footer>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
+
+  .reviews__card {
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    transition: border-color var(--dur-base) var(--ease);
+  }
+
+  .reviews__card:hover {
+    border-color: var(--clr-accent);
+  }
+
+  .reviews__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .reviews__star {
+    font-size: var(--fs-md);
+    color: var(--clr-border-2);
+  }
+
+  .reviews__star.filled {
+    color: var(--clr-accent);
+  }
+
+  .reviews__quote {
+    font-size: var(--fs-base);
+    color: var(--clr-text);
+    line-height: var(--lh-relaxed);
+    flex: 1;
+  }
+
+  .reviews__author {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    border-top: 1px solid var(--clr-border);
+    padding-top: var(--sp-4);
+  }
+
+  .reviews__avatar {
+    width: 36px;
+    height: 36px;
+    background-color: var(--clr-surface-3);
+    color: var(--clr-accent);
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  .reviews__name {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text);
+  }
+
+  .reviews__src {
+    font-size: 10px;
+    color: var(--clr-text-dim);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+  }
+
+  @media (max-width: 768px) {
+    .reviews__grid { grid-template-columns: 1fr; }
+  }
+</style>

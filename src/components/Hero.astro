@@ -1,0 +1,304 @@
+---
+
+---
+
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <img
+      src="/assets/images/hero/hero-main.png"
+      alt="Wet Pets aquarium store"
+      class="hero__img"
+    />
+    <div class="hero__overlay"></div>
+    <div class="hero__glow"></div>
+  </div>
+
+  <div class="container hero__content">
+    <div class="hero__text-backdrop"></div>
+    <div class="hero__text-inner">
+      <p class="label hero__label reveal">Aquarium Store · Kolkata</p>
+      <h1 class="h1 hero__title reveal reveal-delay-1">
+        Where Every<br />Fish Finds<br /><span class="hero__em">a Home.</span>
+      </h1>
+      <p class="hero__desc reveal reveal-delay-2">
+        Exotic ornamental fish, aquariums, and everything you need to build and
+        maintain a thriving aquatic world.
+      </p>
+      <div class="hero__actions reveal reveal-delay-3">
+        <a href="/products" class="btn btn--primary">View Products</a>
+        <a href="/contact" class="btn btn--outline hero__contact-btn">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="hero__stats">
+    <div class="container hero__stats-inner">
+      <div class="hero__stat">
+        <div class="hero__stat-value">
+          <span class="hero__stat-num" data-target="200">0</span><span
+            class="hero__stat-suffix">+</span
+          >
+        </div>
+        <span class="hero__stat-label">Species</span>
+      </div>
+      <div class="hero__stat-sep"></div>
+      <div class="hero__stat">
+        <div class="hero__stat-value">
+          <span class="hero__stat-text">4.0</span><span
+            class="hero__stat-suffix"
+          >
+            ★</span
+          >
+        </div>
+        <span class="hero__stat-label">Rating</span>
+      </div>
+      <div class="hero__stat-sep"></div>
+      <div class="hero__stat">
+        <div class="hero__stat-value">
+          <span class="hero__stat-text">24/7</span>
+        </div>
+        <span class="hero__stat-label">Always Open</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(1.2) brightness(0.7);
+  }
+
+  /* Main gradient overlay — lets the blue through while adding depth */
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      175deg,
+      rgba(8, 12, 16, 0.85) 0%,
+      rgba(10, 30, 60, 0.35) 35%,
+      rgba(15, 40, 80, 0.2) 55%,
+      rgba(8, 12, 16, 0.8) 100%
+    );
+  }
+
+  /* Blue ambient glow from bottom to tie into water theme */
+  .hero__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 120% 60% at 50% 90%,
+      rgba(74, 159, 216, 0.12) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    padding-top: calc(var(--nav-h) + var(--sp-20));
+    padding-bottom: 140px;
+  }
+
+  /* Soft shadow cloud behind hero text for legibility */
+  .hero__text-backdrop {
+    position: absolute;
+    top: calc(var(--nav-h) + var(--sp-4));
+    left: -var(--sp-16);
+    width: 640px;
+    bottom: 80px;
+    background: radial-gradient(
+      ellipse 100% 100% at 25% 45%,
+      rgba(8, 12, 16, 0.55) 0%,
+      rgba(8, 12, 16, 0.35) 25%,
+      rgba(8, 12, 16, 0.15) 50%,
+      rgba(8, 12, 16, 0.04) 70%,
+      transparent 100%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(30px);
+  }
+
+  .hero__text-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Frosted glass effect on hero Contact Us button */
+  .hero__contact-btn {
+    background: rgba(74, 159, 216, 0.1) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(74, 159, 216, 0.2) !important;
+    color: var(--clr-accent-lt) !important;
+    box-shadow: 0 0 16px rgba(74, 159, 216, 0.06), inset 0 0 0 0.5px rgba(255, 255, 255, 0.05);
+  }
+
+  .hero__contact-btn:hover {
+    background: rgba(74, 159, 216, 0.2) !important;
+    border-color: rgba(74, 159, 216, 0.35) !important;
+    color: var(--clr-white) !important;
+    box-shadow: 0 0 24px rgba(74, 159, 216, 0.12), inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+  }
+
+  .hero__label {
+    margin-bottom: var(--sp-5);
+  }
+
+  .hero__title {
+    color: var(--clr-white);
+    max-width: 12ch;
+  }
+
+  .hero__em {
+    color: var(--clr-accent-lt);
+    font-style: italic;
+  }
+
+  .hero__desc {
+    margin-top: var(--sp-6);
+    font-size: var(--fs-md);
+    color: rgba(223, 230, 237, 0.7);
+    max-width: 40ch;
+    line-height: var(--lh-relaxed);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--sp-4);
+    margin-top: var(--sp-8);
+    flex-wrap: wrap;
+  }
+
+  /* ── Stats bar ── */
+  .hero__stats {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background: rgba(13, 18, 24, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--clr-border);
+  }
+
+  .hero__stats-inner {
+    display: flex;
+    align-items: center;
+    height: 80px;
+  }
+
+  .hero__stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+
+  .hero__stat-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    white-space: nowrap;
+  }
+
+  .hero__stat-num,
+  .hero__stat-text {
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-extra);
+    color: var(--clr-accent);
+    line-height: 1;
+  }
+
+  .hero__stat-suffix {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    color: var(--clr-accent);
+    line-height: 1;
+    margin-left: 2px;
+  }
+
+  .hero__stat-label {
+    font-size: 10px;
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+    color: var(--clr-text-muted);
+  }
+
+  .hero__stat-sep {
+    width: 1px;
+    height: 32px;
+    background-color: var(--clr-border);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero__content {
+      padding-bottom: 120px;
+    }
+    .hero__stats-inner {
+      height: 68px;
+    }
+    .hero__stat-num,
+    .hero__stat-text {
+      font-size: var(--fs-xl);
+    }
+    .hero__stat-suffix {
+      font-size: var(--fs-base);
+    }
+  }
+</style>
+
+<script>
+  const counters = document.querySelectorAll<HTMLElement>(
+    ".hero__stat-num[data-target]",
+  );
+  const run = (el: HTMLElement) => {
+    const target = Number(el.dataset.target);
+    const dur = 1400;
+    const step = target / (dur / 16);
+    let cur = 0;
+    const tick = () => {
+      cur = Math.min(cur + step, target);
+      el.textContent = Math.floor(cur).toString();
+      if (cur < target) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const so = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          run(e.target as HTMLElement);
+          so.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.5 },
+  );
+  counters.forEach((c) => so.observe(c));
+</script>
