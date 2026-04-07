@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'Wet Pets — Admin',
 
   // TODO: Replace with your actual Sanity project ID and dataset
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: 'smg3m7h8',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],

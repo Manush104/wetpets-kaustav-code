@@ -11,7 +11,11 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { products } from '../data/products';
+import { products as localProducts } from '../data/products';
+import { getProducts } from '../utils/sanity';
+
+const sanityProducts = await getProducts();
+const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
 
 // Show 4 featured products on the home page
 const featured = products.filter(p => p.inStock).slice(0, 4);

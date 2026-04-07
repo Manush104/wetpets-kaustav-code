@@ -4,7 +4,11 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { products, categoryTree } from '../data/products';
+import { products as localProducts, categoryTree } from '../data/products';
+import { getProducts } from '../utils/sanity';
+
+const sanityProducts = await getProducts();
+const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
 ---
 
 <Layout
