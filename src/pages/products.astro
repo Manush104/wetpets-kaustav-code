@@ -1,0 +1,432 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products as localProducts, categoryTree } from '../data/products';
+import { getProducts } from '../utils/sanity';
+
+const sanityProducts = await getProducts();
+const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
+---
+
+<Layout
+  title="Products — Wet Pets Aquarium Store, Kolkata"
+  description="Browse our full range of fish, aquariums, and accessories. WhatsApp or call to enquire."
+>
+  <Nav />
+  <main id="main-content">
+    <!-- Page header -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="label reveal">Our Products</p>
+        <h1 class="h2 reveal reveal-delay-1" style="margin-top: var(--sp-3);">Browse Our Full Range</h1>
+        <p class="page-hero__desc reveal reveal-delay-2">
+          Fish, tanks, and accessories — all available in-store. WhatsApp or call to check availability and pricing.
+        </p>
+      </div>
+    </section>
+
+    <!-- Category Cards -->
+    <section class="section--sm" style="padding-top: var(--sp-8); padding-bottom: 0;">
+      <div class="container">
+        <div class="cat-cards reveal" id="cat-cards">
+          <button class="cat-card active" data-cat="all">
+            <span class="cat-card__label">All Products</span>
+            <span class="cat-card__count">{products.length} items</span>
+          </button>
+          {categoryTree.map((cat) => {
+            const count = products.filter(p => p.category === cat.id).length;
+            return (
+              <button class="cat-card" data-cat={cat.id}>
+                <img src={cat.image} alt={cat.label} class="cat-card__bg" loading="lazy" />
+                <div class="cat-card__overlay"></div>
+                <span class="cat-card__label">{cat.label}</span>
+                <span class="cat-card__count">{count} items</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Subcategory filters (appear when a category is selected) -->
+    <section class="section--sm" style="padding-top: var(--sp-4); padding-bottom: 0;">
+      <div class="container">
+        <div class="sub-filters" id="sub-filters" style="display: none;">
+          <button class="sub-filter-btn active" data-sub="all">All</button>
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter + Grid -->
+    <section class="section--sm" style="padding-top: 0;">
+      <div class="container">
+        <!-- Product grid -->
+        <div class="products-grid" id="products-grid">
+          {products.map((p, i) => (
+            <div
+              class={`product-item reveal${i % 4 === 1 ? ' reveal-delay-1' : i % 4 === 2 ? ' reveal-delay-2' : i % 4 === 3 ? ' reveal-delay-3' : ''}`}
+              data-category={p.category}
+              data-subcategory={p.subcategory}
+              id={`product-wrap-${p.id}`}
+            >
+              <ProductCard product={p} />
+            </div>
+          ))}
+        </div>
+
+        <!-- Empty state -->
+        <div class="products-empty" id="products-empty" style="display: none;">
+          <p class="text-muted">No products in this category yet. Check back soon or contact us to enquire.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section--sm">
+      <div class="container" style="text-align: center;">
+        <p class="text-muted reveal" style="margin-bottom: var(--sp-5);">
+          Can't find what you're looking for? We source on request.
+        </p>
+        <div class="reveal reveal-delay-1" style="display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap;">
+          <a href="https://wa.me/918910518028?text=Hi%2C+I%27m+looking+for+a+specific+product.+Can+you+help%3F" target="_blank" rel="noopener" class="btn btn--whatsapp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Request a Product
+          </a>
+          <a href="/wetpets-kaustav-code/contact" class="btn btn--outline">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--nav-h) + var(--sp-16));
+    padding-bottom: var(--sp-12);
+    background-color: var(--clr-surface);
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .page-hero__desc {
+    margin-top: var(--sp-4);
+    color: var(--clr-text-muted);
+    max-width: 50ch;
+    line-height: var(--lh-relaxed);
+  }
+
+  /* ── Category Cards ────────────────────────────────── */
+  .cat-cards {
+    display: flex;
+    gap: var(--sp-3);
+    overflow-x: auto;
+    padding-bottom: var(--sp-2);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .cat-cards::-webkit-scrollbar { display: none; }
+
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    flex-shrink: 0;
+    padding: var(--sp-4) var(--sp-6);
+    min-width: 140px;
+    min-height: 90px;
+    background-color: var(--clr-surface-2);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color 250ms var(--ease),
+      transform 250ms var(--ease),
+      box-shadow 250ms var(--ease);
+  }
+
+  .cat-card:hover {
+    border-color: var(--clr-border-2);
+    transform: translateY(-2px);
+  }
+
+  .cat-card.active {
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 20px rgba(74, 159, 216, 0.1);
+  }
+
+  .cat-card__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+    transition: opacity 400ms var(--ease), transform 600ms var(--ease);
+    z-index: 0;
+  }
+
+  .cat-card:hover .cat-card__bg {
+    opacity: 0.25;
+    transform: scale(1.08);
+  }
+
+  .cat-card.active .cat-card__bg {
+    opacity: 0.2;
+  }
+
+  .cat-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 12, 16, 0.2) 0%, rgba(8, 12, 16, 0.7) 100%);
+    z-index: 1;
+  }
+
+  .cat-card__label {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text);
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cat-card__count {
+    font-size: 10px;
+    color: var(--clr-text-dim);
+    letter-spacing: var(--ls-wide);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Subcategory filters ───────────────────────────── */
+  .sub-filters {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+    padding-top: var(--sp-4);
+    padding-bottom: var(--sp-6);
+    animation: fadeSlideIn 300ms var(--ease) forwards;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .sub-filter-btn {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+    padding: var(--sp-2) var(--sp-5);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-full);
+    color: var(--clr-text-muted);
+    background: transparent;
+    cursor: pointer;
+    transition: all var(--dur-base) var(--ease);
+    white-space: nowrap;
+  }
+
+  .sub-filter-btn:hover {
+    border-color: var(--clr-border-2);
+    color: var(--clr-text);
+  }
+
+  .sub-filter-btn.active {
+    background-color: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: var(--clr-bg);
+  }
+
+  /* ── Grid ──────────────────────────────────────────── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+  }
+
+  .product-item {
+    transition: opacity var(--dur-base), transform var(--dur-base);
+  }
+
+  .product-item.hidden {
+    display: none;
+  }
+
+  .products-empty {
+    text-align: center;
+    padding: var(--sp-16) 0;
+  }
+
+  @media (max-width: 1100px) {
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+    .cat-card { min-width: 100px; min-height: 75px; padding: var(--sp-2) var(--sp-3); }
+    .cat-card__label { font-size: 10px; }
+    .cat-card__count { font-size: 9px; }
+    .sub-filter-btn { padding: var(--sp-1) var(--sp-3); font-size: 10px; }
+  }
+
+  @media (max-width: 480px) {
+    .products-grid { 
+        gap: var(--sp-1);
+    }
+  }
+</style>
+
+<script>
+  // ── Category tree (matches server data) ─────────────
+  const CATEGORY_TREE: Record<string, { label: string; id: string }[]> = {
+    livestock: [
+      { id: 'freshwater-fish', label: 'Freshwater Fish' },
+      { id: 'marine-fish',     label: 'Marine Fish' },
+      { id: 'shrimp-inverts',  label: 'Shrimp & Invertebrates' },
+      { id: 'live-plants',     label: 'Live Aquatic Plants' },
+    ],
+    tanks: [
+      { id: 'starter-kits',     label: 'Starter Kits' },
+      { id: 'specialty-tanks',  label: 'Specialty Tanks' },
+      { id: 'stands-cabinetry', label: 'Stands & Cabinetry' },
+    ],
+    equipment: [
+      { id: 'filtration',     label: 'Filtration Systems' },
+      { id: 'lighting',       label: 'Lighting' },
+      { id: 'heaters-thermo', label: 'Heaters & Thermometers' },
+      { id: 'air-pumps-wave', label: 'Air Pumps & Wave Makers' },
+      { id: 'co2-systems',    label: 'CO₂ Systems' },
+    ],
+    maintenance: [
+      { id: 'fish-food',          label: 'Fish Food' },
+      { id: 'water-conditioners', label: 'Water Conditioners' },
+      { id: 'fertilizers',        label: 'Fertilizers' },
+      { id: 'substrates-decor',   label: 'Substrates & Decor' },
+    ],
+  };
+
+  const catCards    = document.querySelectorAll<HTMLButtonElement>('.cat-card');
+  const items       = document.querySelectorAll<HTMLElement>('.product-item');
+  const empty       = document.getElementById('products-empty')!;
+  const subFilters  = document.getElementById('sub-filters')!;
+
+  let currentCat = 'all';
+  let currentSub = 'all';
+  let currentSearch = new URLSearchParams(window.location.search).get('q')?.toLowerCase() || '';
+
+  // ── Check URL param on load ───────────────────────────
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCat = urlParams.get('cat');
+  
+  if (urlCat && (urlCat === 'all' || CATEGORY_TREE[urlCat])) {
+    currentCat = urlCat;
+    catCards.forEach(c => c.classList.toggle('active', c.dataset.cat === urlCat));
+    renderSubFilters(urlCat);
+  }
+  
+  if (currentSearch || urlCat) {
+    filterProducts();
+  }
+
+
+  // ── Category cards click ──────────────────────────────
+  catCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      catCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      currentCat = card.dataset.cat!;
+      currentSub = 'all';
+      currentSearch = ''; // Clear search when changing full categories
+      
+      // Remove 'q' param from URL without reload
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete('q');
+      if (currentCat !== 'all') newUrl.searchParams.set('cat', currentCat);
+      else newUrl.searchParams.delete('cat');
+      window.history.replaceState({}, '', newUrl);
+      
+      renderSubFilters(currentCat);
+      filterProducts();
+    });
+  });
+
+  // ── Render subcategory filter pills ───────────────────
+  function renderSubFilters(cat: string) {
+    if (cat === 'all' || !CATEGORY_TREE[cat]) {
+      subFilters.style.display = 'none';
+      return;
+    }
+
+    const subs = CATEGORY_TREE[cat];
+    subFilters.style.display = 'flex';
+    // Reset animation
+    subFilters.style.animation = 'none';
+    subFilters.offsetHeight; // trigger reflow
+    subFilters.style.animation = '';
+
+    subFilters.innerHTML = `<button class="sub-filter-btn active" data-sub="all">All</button>`;
+    subs.forEach((s) => {
+      const btn = document.createElement('button');
+      btn.className = 'sub-filter-btn';
+      btn.dataset.sub = s.id;
+      btn.textContent = s.label;
+      subFilters.appendChild(btn);
+    });
+
+    // Attach click handlers
+    subFilters.querySelectorAll<HTMLButtonElement>('.sub-filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        subFilters.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSub = btn.dataset.sub!;
+        filterProducts();
+      });
+    });
+  }
+
+  // ── Filter products ───────────────────────────────────
+  function filterProducts() {
+    let visible = 0;
+    items.forEach((item) => {
+      const matchCat = currentCat === 'all' || item.dataset.category === currentCat;
+      const matchSub = currentSub === 'all' || item.dataset.subcategory === currentSub;
+      
+      // Text Search
+      let matchSearch = true;
+      if (currentSearch) {
+        const textContent = item.textContent?.toLowerCase() || '';
+        matchSearch = textContent.includes(currentSearch);
+      }
+
+      const show = matchCat && matchSub && matchSearch;
+      item.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    
+    if (visible === 0) {
+      empty.style.display = 'block';
+      if (currentSearch) {
+        empty.innerHTML = `<p class="text-muted">No products found matching "<strong>${currentSearch}</strong>". Please try a different search term or contact us to enquire.</p>`;
+      } else {
+        empty.innerHTML = `<p class="text-muted">No products in this category yet. Check back soon or contact us to enquire.</p>`;
+      }
+    } else {
+      empty.style.display = 'none';
+    }
+  }
+</script>

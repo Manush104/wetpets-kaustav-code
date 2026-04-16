@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+---
+
+<Layout
+  title="About Us — Wet Pets Aquarium Store, Kolkata"
+  description="Learn about Wet Pets — Kolkata's trusted aquarium store with 200+ species and expert guidance."
+>
+  <Nav />
+  <main id="main-content">
+    <!-- Page header -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="label reveal">About Us</p>
+        <h1 class="h2 reveal reveal-delay-1" style="margin-top: var(--sp-3);">Our Story</h1>
+      </div>
+    </section>
+
+    <!-- Story section -->
+    <section class="section">
+      <div class="container about-page__inner">
+        <div class="about-page__text">
+          <h2 class="h3 reveal">Kolkata's Go-To Aquarium Store</h2>
+          <p class="about-page__body reveal reveal-delay-1">
+            Wet Pets was founded with a simple mission — to bring the highest quality
+            ornamental fish and aquarium products to Kolkata's growing community of fishkeeping enthusiasts.
+          </p>
+          <p class="about-page__body reveal reveal-delay-2">
+            Over the years, we've built a reputation for always having stock, offering expert
+            advice, and providing a welcoming experience for both beginners and seasoned hobbyists.
+            Whether you're looking for your first Betta or a rare imported Arowana, you'll find it here.
+          </p>
+          <p class="about-page__body reveal reveal-delay-3">
+            Our owner is passionate about the hobby and personally oversees the health and quality
+            of every fish that enters our store. We believe that a great aquarium starts with a 
+            great relationship — and we're always here to help.
+          </p>
+        </div>
+
+        <div class="about-page__image reveal reveal-delay-1">
+          <img src="/wetpets-kaustav-code/assets/images/store/store-front.jpg" alt="Wet Pets Storefront" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="section--sm" style="background-color: var(--clr-surface); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border);">
+      <div class="container">
+        <div class="section-header section-header--center reveal">
+          <p class="label">Why Choose Us</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-card reveal">
+            <span class="why-card__num">01</span>
+            <h3 class="h4">Always in Stock</h3>
+            <p>We carry 200+ species and restock regularly. If it's not on our shelves, we'll source it for you.</p>
+          </div>
+          <div class="why-card reveal reveal-delay-1">
+            <span class="why-card__num">02</span>
+            <h3 class="h4">Expert Advice</h3>
+            <p>Our team has years of experience and is always happy to guide you on tank setup, care, and compatibility.</p>
+          </div>
+          <div class="why-card reveal reveal-delay-2">
+            <span class="why-card__num">03</span>
+            <h3 class="h4">Open 24/7</h3>
+            <p>Need fish medication at midnight? We're here. Wet Pets is open around the clock, every day of the year.</p>
+          </div>
+          <div class="why-card reveal reveal-delay-3">
+            <span class="why-card__num">04</span>
+            <h3 class="h4">Fair Pricing</h3>
+            <p>Competitive prices on all products. No hidden charges. What you see is what you get.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="label">Our Store</p>
+          <div class="divider"></div>
+          <h2 class="h2">Take a Look Inside</h2>
+          <p>Photos from our store. Visit us to see our full selection in person.</p>
+        </div>
+
+        <div class="store-gallery">
+          <div class="store-gallery__item store-gallery__item--wide reveal">
+            <img src="/wetpets-kaustav-code/assets/images/store/store-front.jpg" alt="Storefront exterior" />
+          </div>
+          <div class="store-gallery__item reveal reveal-delay-1">
+            <img src="/wetpets-kaustav-code/assets/images/store/tank-1-new.jpg" alt="Display tank 1" />
+          </div>
+          <div class="store-gallery__item reveal reveal-delay-2">
+            <img src="/wetpets-kaustav-code/assets/images/store/tank-2-new.png" alt="Display tank 2" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section--sm" style="text-align: center; border-top: 1px solid var(--clr-border);">
+      <div class="container reveal">
+        <h2 class="h3" style="margin-bottom: var(--sp-4);">Ready to Visit?</h2>
+        <p class="text-muted" style="margin-bottom: var(--sp-6); max-width: 40ch; margin-inline: auto;">
+          We're always open and happy to help. Drop by or get in touch.
+        </p>
+        <div style="display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap;">
+          <a href="/wetpets-kaustav-code/contact" class="btn btn--primary">Contact Us</a>
+          <a href="/wetpets-kaustav-code/products" class="btn btn--outline">Browse Products</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--nav-h) + var(--sp-16));
+    padding-bottom: var(--sp-12);
+    background-color: var(--clr-surface);
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  /* Story */
+  .about-page__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(var(--sp-10), 5vw, var(--sp-20));
+    align-items: center;
+  }
+
+  .about-page__body {
+    margin-top: var(--sp-4);
+    color: var(--clr-text-muted);
+    line-height: var(--lh-relaxed);
+  }
+
+  .about-page__image {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: var(--clr-surface-2);
+    border-radius: var(--radius-md);
+  }
+
+  .about-page__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Why grid */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+  }
+
+  .why-card {
+    padding: var(--sp-6);
+    border: 1px solid var(--clr-border);
+    background-color: var(--clr-surface-2);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .why-card__num {
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-extra);
+    color: var(--clr-border-2);
+    line-height: 1;
+  }
+
+  .why-card h3 { color: var(--clr-text); }
+
+  .why-card p {
+    font-size: var(--fs-sm);
+    color: var(--clr-text-muted);
+    line-height: var(--lh-relaxed);
+  }
+
+  /* Gallery */
+  .store-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--sp-3);
+  }
+
+  .store-gallery__item {
+    overflow: hidden;
+    background-color: var(--clr-surface-2);
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+  }
+
+  .store-gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease);
+  }
+
+  .store-gallery__item:hover img {
+    transform: scale(1.04);
+  }
+
+  @media (max-width: 900px) {
+    .about-page__inner { grid-template-columns: 1fr; }
+    .about-page__image { order: -1; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .store-gallery { grid-template-columns: 1fr 1fr; }
+    .store-gallery__item--wide { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 560px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .store-gallery { grid-template-columns: 1fr; }
+  }
+</style>

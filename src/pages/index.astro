@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import MarqueeTicker from '../components/MarqueeTicker.astro';
+import Services from '../components/Services.astro';
+import Reviews from '../components/Reviews.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products as localProducts } from '../data/products';
+import { getProducts } from '../utils/sanity';
+
+const sanityProducts = await getProducts();
+const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
+
+// Show 4 featured products on the home page
+const featured = products.filter(p => p.inStock).slice(0, 4);
+---
+
+<Layout
+  title="Wet Pets — Aquarium Store, Kolkata | Fish, Tanks & Supplies"
+  description="Ornamental fish, aquariums, and aquarium supplies in Kolkata. 200+ freshwater species. Open 24/7."
+>
+  <Nav />
+  <main id="main-content">
+    <Hero />
+    <About />
+    <MarqueeTicker />
+
+    <!-- Featured Products -->
+    <section class="section" id="featured">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="label">Featured Products</p>
+          <div class="divider"></div>
+          <h2 class="h2">Popular Right Now</h2>
+          <p>A small selection from our inventory. Browse all products to see the full range.</p>
+        </div>
+
+        <div class="featured-grid">
+          {featured.map((p, i) => (
+            <div class={`reveal${i % 4 === 1 ? ' reveal-delay-1' : i % 4 === 2 ? ' reveal-delay-2' : i % 4 === 3 ? ' reveal-delay-3' : ''}`}>
+              <ProductCard product={p} />
+            </div>
+          ))}
+        </div>
+
+        <div class="featured-cta reveal" style="margin-top: var(--sp-8); text-align: center;">
+          <a href="/wetpets-kaustav-code/products" class="btn btn--outline">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <Services />
+    <Reviews />
+    <FAQ />
+    <Contact />
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+
+<style>
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+  }
+
+  @media (max-width: 1100px) {
+    .featured-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .featured-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+  }
+</style>

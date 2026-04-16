@@ -1,0 +1,58 @@
+---
+const fishNames = [
+  'Neon Tetra', 'Discus', 'Arowana', 'Flowerhorn', 'Guppy', 'Betta',
+  'Koi', 'Angelfish', 'Oscar', 'Clown Loach', 'Bala Shark', 'Parrot Fish',
+  'Cardinal Tetra', 'Oranda', 'Gourami', 'Piranha', 'Cichlid', 'Bichir',
+  'Neon Tetra', 'Discus', 'Arowana', 'Flowerhorn', 'Guppy', 'Betta',
+  'Koi', 'Angelfish', 'Oscar', 'Clown Loach', 'Bala Shark', 'Parrot Fish',
+];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {fishNames.map((n) => (
+      <span class="marquee__item">{n}<span class="marquee__dot">·</span></span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--clr-border);
+    border-bottom: 1px solid var(--clr-border);
+    background-color: var(--clr-surface);
+  }
+
+  .marquee__track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 38s linear infinite;
+    padding-block: var(--sp-4);
+  }
+
+  .marquee__item {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    color: var(--clr-text-dim);
+    padding-inline: var(--sp-4);
+    flex-shrink: 0;
+  }
+
+  .marquee__dot {
+    color: var(--clr-accent);
+    margin-left: var(--sp-4);
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track { animation: none; }
+  }
+</style>

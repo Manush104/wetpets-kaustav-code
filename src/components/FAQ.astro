@@ -1,0 +1,122 @@
+---
+const faqs = [
+  {
+    q: 'What kind of fish aquariums are available at Wet Pets?',
+    a: 'Wet Pets has a variety of fish aquariums that are suitable for home or office space. We carry nano tanks, mid-size community tanks, and large display aquariums. You can also reach out if you have specific requirements — we source on request.',
+  },
+  {
+    q: 'What are your opening hours?',
+    a: 'Wet Pets is open 24 hours a day, 7 days a week, including weekends and public holidays.',
+  },
+  {
+    q: 'How can I purchase a fish or product?',
+    a: 'We don\'t currently sell online. You can visit us directly, call us, or reach out via WhatsApp to check availability and reserve items. We\'ll be happy to assist you.',
+  },
+  {
+    q: 'Do you provide home delivery?',
+    a: 'It is best to contact us directly to discuss delivery options. Live fish delivery requires careful handling, so we prefer to confirm details before committing.',
+  },
+  {
+    q: 'Can I get fish food from Wet Pets?',
+    a: 'Absolutely. We carry a wide range of fish food — flakes, pellets, freeze-dried, frozen bloodworms, live food, and specialty diets for different species.',
+  },
+  {
+    q: 'Can you source a specific species?',
+    a: 'Yes — we regularly import exotic species. If you\'re after something not currently in stock, let us know and we can source it for you.',
+  },
+];
+---
+
+<section class="faq section" id="faq">
+  <div class="container faq__inner">
+    <div class="faq__header section-header reveal">
+      <p class="label">FAQ</p>
+      <div class="divider"></div>
+      <h2 class="h2">Frequently Asked<br />Questions</h2>
+    </div>
+
+    <div class="faq__list">
+      {faqs.map((faq, i) => (
+        <details class={`faq__item reveal${i % 2 === 1 ? ' reveal-delay-1' : ''}`}>
+          <summary class="faq__q">
+            <span>{faq.q}</span>
+            <svg class="faq__chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </summary>
+          <div class="faq__a"><p>{faq.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(var(--sp-10), 5vw, var(--sp-20));
+    align-items: start;
+  }
+
+  .faq__header {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--sp-6));
+    margin-bottom: 0;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--clr-border);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .faq__item[open] .faq__chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-6);
+    padding: var(--sp-5) 0;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+    color: var(--clr-text);
+    list-style: none;
+    user-select: none;
+    transition: color var(--dur-base) var(--ease);
+  }
+
+  .faq__q:hover { color: var(--clr-accent); }
+  .faq__q::-webkit-details-marker { display: none; }
+
+  .faq__chevron {
+    flex-shrink: 0;
+    color: var(--clr-text-muted);
+    transition: transform var(--dur-base) var(--ease);
+  }
+
+  .faq__a {
+    padding-bottom: var(--sp-5);
+    padding-right: var(--sp-8);
+  }
+
+  .faq__a p {
+    color: var(--clr-text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-relaxed);
+  }
+
+  @media (max-width: 900px) {
+    .faq__inner { grid-template-columns: 1fr; }
+    .faq__header { position: static; }
+  }
+</style>

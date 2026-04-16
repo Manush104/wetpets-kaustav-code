@@ -1,0 +1,8 @@
+﻿<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#1a1a1a"/>
+  <rect x="0" y="0" width="1920" height="1080" fill="none" stroke="#2c2c2c" stroke-width="1"/>
+  <line x1="0" y1="0" x2="1920" y2="1080" stroke="#242424" stroke-width="1"/>
+  <line x1="1920" y1="0" x2="0" y2="1080" stroke="#242424" stroke-width="1"/>
+  <text x="960" y="530" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" fill="#555">Hero  Wet Pets Store Interior</text>
+  <text x="960" y="552" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#3a3a3a">Replace with real photo</text>
+</svg>

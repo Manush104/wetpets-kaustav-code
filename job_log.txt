@@ -1,0 +1,243 @@
+﻿2026-04-07T10:36:30.0702561Z Current runner version: '2.333.1'
+2026-04-07T10:36:30.0725974Z ##[group]Runner Image Provisioner
+2026-04-07T10:36:30.0726852Z Hosted Compute Agent
+2026-04-07T10:36:30.0727373Z Version: 20260213.493
+2026-04-07T10:36:30.0727962Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-04-07T10:36:30.0728749Z Build Date: 2026-02-13T00:28:41Z
+2026-04-07T10:36:30.0729649Z Worker ID: {c8df75b8-98fa-4fe7-8f83-9f2ca66e740f}
+2026-04-07T10:36:30.0730322Z Azure Region: northcentralus
+2026-04-07T10:36:30.0730949Z ##[endgroup]
+2026-04-07T10:36:30.0732442Z ##[group]Operating System
+2026-04-07T10:36:30.0733004Z Ubuntu
+2026-04-07T10:36:30.0733581Z 24.04.4
+2026-04-07T10:36:30.0733991Z LTS
+2026-04-07T10:36:30.0734437Z ##[endgroup]
+2026-04-07T10:36:30.0734925Z ##[group]Runner Image
+2026-04-07T10:36:30.0735515Z Image: ubuntu-24.04
+2026-04-07T10:36:30.0736026Z Version: 20260329.72.1
+2026-04-07T10:36:30.0737241Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260329.72/images/ubuntu/Ubuntu2404-Readme.md
+2026-04-07T10:36:30.0738655Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260329.72
+2026-04-07T10:36:30.0739920Z ##[endgroup]
+2026-04-07T10:36:30.0741001Z ##[group]GITHUB_TOKEN Permissions
+2026-04-07T10:36:30.0742970Z Contents: read
+2026-04-07T10:36:30.0743497Z Metadata: read
+2026-04-07T10:36:30.0743988Z Pages: write
+2026-04-07T10:36:30.0744418Z ##[endgroup]
+2026-04-07T10:36:30.0746426Z Secret source: Actions
+2026-04-07T10:36:30.0747094Z Prepare workflow directory
+2026-04-07T10:36:30.1173085Z Prepare all required actions
+2026-04-07T10:36:30.1227575Z Getting action download info
+2026-04-07T10:36:30.5318500Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-04-07T10:36:30.6611004Z Download action repository 'withastro/action@v3' (SHA:56781b97402ce0487b7e61ce2cb960c0e2cc5289)
+2026-04-07T10:36:31.0988401Z Getting action download info
+2026-04-07T10:36:31.3573482Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+2026-04-07T10:36:31.8911881Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+2026-04-07T10:36:32.3219875Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-04-07T10:36:32.4070802Z Download action repository 'actions/upload-pages-artifact@v3' (SHA:56afc609e74202658d3ffba0e8f6dda462b719fa)
+2026-04-07T10:36:32.6906206Z Getting action download info
+2026-04-07T10:36:32.8100215Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-04-07T10:36:32.9647289Z Complete job name: build
+2026-04-07T10:36:33.0442948Z ##[group]Run actions/checkout@v4
+2026-04-07T10:36:33.0444550Z with:
+2026-04-07T10:36:33.0445370Z   repository: Manush104/wetpets-kaustav-code
+2026-04-07T10:36:33.0446635Z   token: ***
+2026-04-07T10:36:33.0447352Z   ssh-strict: true
+2026-04-07T10:36:33.0448099Z   ssh-user: git
+2026-04-07T10:36:33.0448868Z   persist-credentials: true
+2026-04-07T10:36:33.0450025Z   clean: true
+2026-04-07T10:36:33.0450799Z   sparse-checkout-cone-mode: true
+2026-04-07T10:36:33.0451724Z   fetch-depth: 1
+2026-04-07T10:36:33.0452459Z   fetch-tags: false
+2026-04-07T10:36:33.0453241Z   show-progress: true
+2026-04-07T10:36:33.0454004Z   lfs: false
+2026-04-07T10:36:33.0454720Z   submodules: false
+2026-04-07T10:36:33.0455493Z   set-safe-directory: true
+2026-04-07T10:36:33.0456661Z ##[endgroup]
+2026-04-07T10:36:33.1691542Z Syncing repository: Manush104/wetpets-kaustav-code
+2026-04-07T10:36:33.1694109Z ##[group]Getting Git version info
+2026-04-07T10:36:33.1695791Z Working directory is '/home/runner/work/wetpets-kaustav-code/wetpets-kaustav-code'
+2026-04-07T10:36:33.1699478Z [command]/usr/bin/git version
+2026-04-07T10:36:33.1736293Z git version 2.53.0
+2026-04-07T10:36:33.1762611Z ##[endgroup]
+2026-04-07T10:36:33.1783843Z Temporarily overriding HOME='/home/runner/work/_temp/639ac4f9-c14a-42b5-b967-62dc96751c6e' before making global git config changes
+2026-04-07T10:36:33.1787412Z Adding repository directory to the temporary git global config as a safe directory
+2026-04-07T10:36:33.1791221Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wetpets-kaustav-code/wetpets-kaustav-code
+2026-04-07T10:36:33.1820524Z Deleting the contents of '/home/runner/work/wetpets-kaustav-code/wetpets-kaustav-code'
+2026-04-07T10:36:33.1823594Z ##[group]Initializing the repository
+2026-04-07T10:36:33.1827751Z [command]/usr/bin/git init /home/runner/work/wetpets-kaustav-code/wetpets-kaustav-code
+2026-04-07T10:36:33.1920284Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-04-07T10:36:33.1923292Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-04-07T10:36:33.1925416Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-04-07T10:36:33.1927120Z hint: call:
+2026-04-07T10:36:33.1928316Z hint:
+2026-04-07T10:36:33.1929648Z hint: 	git config --global init.defaultBranch <name>
+2026-04-07T10:36:33.1930798Z hint:
+2026-04-07T10:36:33.1931971Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-04-07T10:36:33.1934019Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-04-07T10:36:33.1935367Z hint:
+2026-04-07T10:36:33.2007673Z hint: 	git branch -m <name>
+2026-04-07T10:36:33.2012506Z hint:
+2026-04-07T10:36:33.2014661Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-04-07T10:36:33.2018344Z Initialized empty Git repository in /home/runner/work/wetpets-kaustav-code/wetpets-kaustav-code/.git/
+2026-04-07T10:36:33.2024349Z [command]/usr/bin/git remote add origin https://github.com/Manush104/wetpets-kaustav-code
+2026-04-07T10:36:33.2029328Z ##[endgroup]
+2026-04-07T10:36:33.2031113Z ##[group]Disabling automatic garbage collection
+2026-04-07T10:36:33.2032288Z [command]/usr/bin/git config --local gc.auto 0
+2026-04-07T10:36:33.2036264Z ##[endgroup]
+2026-04-07T10:36:33.2038196Z ##[group]Setting up auth
+2026-04-07T10:36:33.2040592Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-04-07T10:36:33.2056998Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-04-07T10:36:33.2350814Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-04-07T10:36:33.2426989Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-04-07T10:36:33.2611760Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-04-07T10:36:33.2648575Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-04-07T10:36:33.2861580Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-04-07T10:36:33.2895689Z ##[endgroup]
+2026-04-07T10:36:33.2896977Z ##[group]Fetching the repository
+2026-04-07T10:36:33.2904724Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9a93371f28175c0e4bcd7697c25d796bc2887e60:refs/remotes/origin/main
+2026-04-07T10:36:34.5337278Z From https://github.com/Manush104/wetpets-kaustav-code
+2026-04-07T10:36:34.5337892Z  * [new ref]         9a93371f28175c0e4bcd7697c25d796bc2887e60 -> origin/main
+2026-04-07T10:36:34.5365527Z ##[endgroup]
+2026-04-07T10:36:34.5366218Z ##[group]Determining the checkout info
+2026-04-07T10:36:34.5368662Z ##[endgroup]
+2026-04-07T10:36:34.5374149Z [command]/usr/bin/git sparse-checkout disable
+2026-04-07T10:36:34.5412364Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-04-07T10:36:34.5437563Z ##[group]Checking out the ref
+2026-04-07T10:36:34.5442438Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-04-07T10:36:34.6164736Z Switched to a new branch 'main'
+2026-04-07T10:36:34.6167501Z branch 'main' set up to track 'origin/main'.
+2026-04-07T10:36:34.6174415Z ##[endgroup]
+2026-04-07T10:36:34.6207791Z [command]/usr/bin/git log -1 --format=%H
+2026-04-07T10:36:34.6229114Z 9a93371f28175c0e4bcd7697c25d796bc2887e60
+2026-04-07T10:36:34.6485562Z ##[group]Run withastro/action@v3
+2026-04-07T10:36:34.6485880Z with:
+2026-04-07T10:36:34.6486056Z   node-version: 20
+2026-04-07T10:36:34.6486246Z   path: .
+2026-04-07T10:36:34.6486416Z ##[endgroup]
+2026-04-07T10:36:34.6590578Z ##[group]Run len=`echo $INPUT_PM | wc -c`
+2026-04-07T10:36:34.6590960Z [36;1mlen=`echo $INPUT_PM | wc -c`[0m
+2026-04-07T10:36:34.6591240Z [36;1mif [ $len -gt 1 ]; then[0m
+2026-04-07T10:36:34.6591585Z [36;1m  PACKAGE_MANAGER=$(echo "$INPUT_PM" | grep -o '^[^@]*')[0m
+2026-04-07T10:36:34.6592040Z [36;1m  VERSION=$(echo "$INPUT_PM" | { grep -o '@.*' || true; } | sed 's/^@//')[0m
+2026-04-07T10:36:34.6592458Z [36;1m  # Set default VERSION if not provided[0m
+2026-04-07T10:36:34.6592763Z [36;1m  if [ -z "$VERSION" ]; then[0m
+2026-04-07T10:36:34.6593015Z [36;1m      VERSION="latest"[0m
+2026-04-07T10:36:34.6593233Z [36;1m  fi[0m
+2026-04-07T10:36:34.6593494Z [36;1m  echo "PACKAGE_MANAGER=$PACKAGE_MANAGER" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6593971Z [36;1melif [ $(find "." -maxdepth 1 -name "pnpm-lock.yaml") ]; then[0m
+2026-04-07T10:36:34.6594389Z [36;1m    echo "PACKAGE_MANAGER=pnpm" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6594742Z [36;1m    echo "LOCKFILE=pnpm-lock.yaml" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6595112Z [36;1melif [ $(find "." -maxdepth 1 -name "yarn.lock") ]; then[0m
+2026-04-07T10:36:34.6595473Z [36;1m    echo "PACKAGE_MANAGER=yarn" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6595796Z [36;1m    echo "LOCKFILE=yarn.lock" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6596161Z [36;1melif [ $(find "." -maxdepth 1 -name "package-lock.json") ]; then[0m
+2026-04-07T10:36:34.6596518Z [36;1m    VERSION="latest"[0m
+2026-04-07T10:36:34.6596778Z [36;1m    echo "PACKAGE_MANAGER=npm" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6597118Z [36;1m    echo "LOCKFILE=package-lock.json" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6597487Z [36;1melif [ $(find "." -maxdepth 1 -name "bun.lock") ]; then[0m
+2026-04-07T10:36:34.6597799Z [36;1m    VERSION="latest"[0m
+2026-04-07T10:36:34.6598059Z [36;1m    echo "PACKAGE_MANAGER=bun" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6598367Z [36;1m    echo "LOCKFILE=bun.lock" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6598708Z [36;1melif [ $(find "." -maxdepth 1 -name "bun.lockb") ]; then[0m
+2026-04-07T10:36:34.6599263Z [36;1m    VERSION="latest"[0m
+2026-04-07T10:36:34.6599529Z [36;1m    echo "PACKAGE_MANAGER=bun" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6599844Z [36;1m    echo "LOCKFILE=bun.lockb" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6600110Z [36;1melse[0m
+2026-04-07T10:36:34.6600303Z [36;1m    echo "No lockfile found.[0m
+2026-04-07T10:36:34.6600707Z [36;1mPlease specify your preferred \"package-manager\" in the action configuration."[0m
+2026-04-07T10:36:34.6601131Z [36;1m    exit 1[0m
+2026-04-07T10:36:34.6601308Z [36;1mfi[0m
+2026-04-07T10:36:34.6601514Z [36;1mecho "VERSION=$VERSION" >> $GITHUB_ENV[0m
+2026-04-07T10:36:34.6630646Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-04-07T10:36:34.6631008Z env:
+2026-04-07T10:36:34.6631184Z   INPUT_PM: 
+2026-04-07T10:36:34.6631359Z ##[endgroup]
+2026-04-07T10:36:34.6882248Z ##[group]Run actions/setup-node@v4
+2026-04-07T10:36:34.6882541Z with:
+2026-04-07T10:36:34.6882718Z   node-version: 20
+2026-04-07T10:36:34.6882902Z   cache: npm
+2026-04-07T10:36:34.6883116Z   cache-dependency-path: ./package-lock.json
+2026-04-07T10:36:34.6883395Z   always-auth: false
+2026-04-07T10:36:34.6883591Z   check-latest: false
+2026-04-07T10:36:34.6883897Z   token: ***
+2026-04-07T10:36:34.6884066Z env:
+2026-04-07T10:36:34.6884238Z   PACKAGE_MANAGER: npm
+2026-04-07T10:36:34.6884453Z   LOCKFILE: package-lock.json
+2026-04-07T10:36:34.6884840Z   VERSION: latest
+2026-04-07T10:36:34.6885019Z ##[endgroup]
+2026-04-07T10:36:34.8618097Z Found in cache @ /opt/hostedtoolcache/node/20.20.2/x64
+2026-04-07T10:36:34.8625221Z ##[group]Environment details
+2026-04-07T10:36:35.1712786Z node: v20.20.2
+2026-04-07T10:36:35.1713203Z npm: 10.8.2
+2026-04-07T10:36:35.1713510Z yarn: 1.22.22
+2026-04-07T10:36:35.1714554Z ##[endgroup]
+2026-04-07T10:36:35.1738662Z [command]/opt/hostedtoolcache/node/20.20.2/x64/bin/npm config get cache
+2026-04-07T10:36:35.2895769Z /home/runner/.npm
+2026-04-07T10:36:35.4448702Z npm cache is not found
+2026-04-07T10:36:35.4567575Z ##[group]Run $PACKAGE_MANAGER install
+2026-04-07T10:36:35.4567879Z [36;1m$PACKAGE_MANAGER install[0m
+2026-04-07T10:36:35.4602338Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-04-07T10:36:35.4602665Z env:
+2026-04-07T10:36:35.4602832Z   PACKAGE_MANAGER: npm
+2026-04-07T10:36:35.4603050Z   LOCKFILE: package-lock.json
+2026-04-07T10:36:35.4603273Z   VERSION: latest
+2026-04-07T10:36:35.4603488Z ##[endgroup]
+2026-04-07T10:36:36.1756971Z npm warn EBADENGINE Unsupported engine {
+2026-04-07T10:36:36.1757574Z npm warn EBADENGINE   package: undefined,
+2026-04-07T10:36:36.1758092Z npm warn EBADENGINE   required: { node: '>=22.12.0' },
+2026-04-07T10:36:36.1758674Z npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+2026-04-07T10:36:36.1759442Z npm warn EBADENGINE }
+2026-04-07T10:36:36.1759806Z npm warn EBADENGINE Unsupported engine {
+2026-04-07T10:36:36.1760318Z npm warn EBADENGINE   package: '@astrojs/prism@4.0.1',
+2026-04-07T10:36:36.1760828Z npm warn EBADENGINE   required: { node: '>=22.12.0' },
+2026-04-07T10:36:36.1761377Z npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+2026-04-07T10:36:36.1761723Z npm warn EBADENGINE }
+2026-04-07T10:36:36.1764330Z npm warn EBADENGINE Unsupported engine {
+2026-04-07T10:36:36.1764718Z npm warn EBADENGINE   package: 'astro@6.1.4',
+2026-04-07T10:36:36.1765247Z npm warn EBADENGINE   required: { node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0' },
+2026-04-07T10:36:36.1765821Z npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+2026-04-07T10:36:36.1766167Z npm warn EBADENGINE }
+2026-04-07T10:36:40.1034174Z 
+2026-04-07T10:36:40.1035130Z added 277 packages, and audited 278 packages in 5s
+2026-04-07T10:36:40.1035680Z 
+2026-04-07T10:36:40.1036263Z 142 packages are looking for funding
+2026-04-07T10:36:40.1036803Z   run `npm fund` for details
+2026-04-07T10:36:40.1047752Z 
+2026-04-07T10:36:40.1049424Z found 0 vulnerabilities
+2026-04-07T10:36:40.1272829Z ##[group]Run $PACKAGE_MANAGER run build
+2026-04-07T10:36:40.1273423Z [36;1m$PACKAGE_MANAGER run build[0m
+2026-04-07T10:36:40.1301467Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-04-07T10:36:40.1301791Z env:
+2026-04-07T10:36:40.1301956Z   PACKAGE_MANAGER: npm
+2026-04-07T10:36:40.1302189Z   LOCKFILE: package-lock.json
+2026-04-07T10:36:40.1302412Z   VERSION: latest
+2026-04-07T10:36:40.1302586Z ##[endgroup]
+2026-04-07T10:36:40.2400886Z 
+2026-04-07T10:36:40.2401492Z > build
+2026-04-07T10:36:40.2401782Z > astro build
+2026-04-07T10:36:40.2401926Z 
+2026-04-07T10:36:40.2957031Z Node.js v20.20.2 is not supported by Astro!
+2026-04-07T10:36:40.2957938Z Please upgrade Node.js to a supported version: ">=22.12.0"
+2026-04-07T10:36:40.2958415Z 
+2026-04-07T10:36:40.2983690Z GitHub Actions CI Environment Detected!
+2026-04-07T10:36:40.2984626Z Additional steps may be needed to set your Node.js version:
+2026-04-07T10:36:40.2985518Z Documentation: https://docs.astro.build/en/guides/deploy/
+2026-04-07T10:36:40.2986040Z 
+2026-04-07T10:36:40.3083429Z ##[error]Process completed with exit code 1.
+2026-04-07T10:36:40.3205180Z Post job cleanup.
+2026-04-07T10:36:40.3285351Z Post job cleanup.
+2026-04-07T10:36:40.4220547Z [command]/usr/bin/git version
+2026-04-07T10:36:40.4255891Z git version 2.53.0
+2026-04-07T10:36:40.4299223Z Temporarily overriding HOME='/home/runner/work/_temp/95e95845-ae39-42cc-9621-141fc582817d' before making global git config changes
+2026-04-07T10:36:40.4300812Z Adding repository directory to the temporary git global config as a safe directory
+2026-04-07T10:36:40.4313478Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wetpets-kaustav-code/wetpets-kaustav-code
+2026-04-07T10:36:40.4346914Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-04-07T10:36:40.4379578Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-04-07T10:36:40.4596836Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-04-07T10:36:40.4616383Z http.https://github.com/.extraheader
+2026-04-07T10:36:40.4628190Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-04-07T10:36:40.4656951Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-04-07T10:36:40.4864924Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-04-07T10:36:40.4893433Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-04-07T10:36:40.5219282Z Cleaning up orphan processes
+2026-04-07T10:36:40.5483138Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-node@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
