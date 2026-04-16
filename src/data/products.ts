@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
-  category: 'livestock' | 'tanks' | 'equipment' | 'maintenance' | 'plants-offers';
+  category: 'livestock' | 'tanks' | 'equipment' | 'maintenance' | 'spacial-offers';
   subcategory: string;
   price: number;         // INR
   priceLabel?: string;   // e.g. "per pair", "onwards"
@@ -24,6 +24,15 @@ export interface CategoryGroup {
 
 export const categoryTree: CategoryGroup[] = [
   {
+    id: 'spacial-offers',
+    label: 'Spacial Offers',
+    image: '/wetpets-kaustav-code/assets/images/categories/livestock.png',
+    subcategories: [
+      { id: 'combo-deals',      label: 'Combo Deals' },
+      { id: 'discount-coupons', label: 'Discount Coupons' },
+    ]
+  },
+  {
     id: 'livestock',
     label: 'Livestock',
     image: '/wetpets-kaustav-code/assets/images/categories/livestock.png',
@@ -31,18 +40,9 @@ export const categoryTree: CategoryGroup[] = [
       { id: 'freshwater-fish',  label: 'Freshwater Fish' },
       { id: 'marine-fish',      label: 'Marine Fish' },
       { id: 'shrimp-inverts',   label: 'Shrimp & Invertebrates' },
+      { id: 'live-plants',      label: 'Live Aquatic Plants' },
       { id: 'livestock-variants', label: 'Livestock Variants' },
     ],
-  },
-  {
-    id: 'plants-offers',
-    label: 'Offers & Plants',
-    image: '/wetpets-kaustav-code/assets/images/categories/livestock.png',
-    subcategories: [
-      { id: 'live-plants',      label: 'Live Aquatic Plants' },
-      { id: 'special-offers',   label: 'Special Offers' },
-      { id: 'discount-coupons', label: 'Discount Coupons' },
-    ]
   },
   {
     id: 'tanks',
@@ -234,7 +234,7 @@ export const products: Product[] = [
     id: 'l12',
     name: 'Java Fern',
     slug: 'java-fern',
-    category: 'plants-offers',
+    category: 'livestock',
     subcategory: 'live-plants',
     price: 120,
     priceLabel: 'each',

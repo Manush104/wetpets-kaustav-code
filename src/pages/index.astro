@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
+import SpecialOffersBanner from '../components/SpecialOffersBanner.astro';
 import About from '../components/About.astro';
 import MarqueeTicker from '../components/MarqueeTicker.astro';
 import Services from '../components/Services.astro';
@@ -28,6 +29,7 @@ const featured = products.filter(p => p.inStock).slice(0, 4);
   <Nav />
   <main id="main-content">
     <Hero />
+    <SpecialOffersBanner />
     <About />
     <MarqueeTicker />
 

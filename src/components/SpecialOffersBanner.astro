@@ -1,0 +1,205 @@
+---
+---
+
+<section class="special-offers section" id="special-offers">
+  <div class="container">
+    <div class="offers-wrapper reveal">
+      <div class="offers-content">
+        <p class="label" style="color: var(--clr-accent-lt);">Exclusive Deals</p>
+        <h2 class="h2">Spacial Offers</h2>
+        <p class="offers-desc">
+          Discover our handpicked combo deals and limited-time discount coupons. Experience premium quality at unbeatable prices to bring your aquarium vision to life.
+        </p>
+        <div class="offers-actions">
+          <a href="/wetpets-kaustav-code/products?cat=spacial-offers" class="btn btn--primary">
+            Explore Deals
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="arrow-icon" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 8h8M9 5l3 3-3 3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="offers-visual">
+        <div class="offers-glass-card">
+          <div class="offers-badge">Up to 30% Off</div>
+          <img src="/wetpets-kaustav-code/assets/images/fish/arowana.jpg" alt="Premium Arowana" class="offers-img" loading="lazy" />
+          <div class="offers-glass-overlay">
+            <h3>Premium Collections</h3>
+            <p>Discount Coupons & Combos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .special-offers {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-8);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Soft gradient background blending with the dark theme */
+  .special-offers::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(74, 159, 216, 0.08) 0%, rgba(8, 12, 16, 0) 70%);
+    transform: translateY(-50%);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .offers-wrapper {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--sp-12);
+    align-items: center;
+    background: rgba(18, 24, 32, 0.4);
+    border: 1px solid rgba(74, 159, 216, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-12);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .offers-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .offers-desc {
+    color: var(--clr-text-muted);
+    line-height: var(--lh-relaxed);
+    font-size: var(--fs-md);
+  }
+
+  .offers-actions {
+    margin-top: var(--sp-2);
+  }
+
+  .btn--primary .arrow-icon {
+    margin-left: 6px;
+    transition: transform 300ms var(--ease);
+  }
+
+  .btn--primary:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+
+  .offers-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .offers-glass-card {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 400ms var(--ease);
+  }
+
+  .offers-glass-card:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  .offers-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.9) contrast(1.1);
+    transition: filter 400ms var(--ease), transform 600ms var(--ease);
+  }
+
+  .offers-glass-card:hover .offers-img {
+    filter: brightness(1) contrast(1.1);
+    transform: scale(1.05);
+  }
+
+  .offers-badge {
+    position: absolute;
+    top: var(--sp-4);
+    right: var(--sp-4);
+    background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dk));
+    color: var(--clr-white);
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-bold);
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: var(--radius-full);
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(74, 159, 216, 0.3);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+  }
+
+  .offers-glass-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--sp-6) var(--sp-5) var(--sp-4);
+    background: linear-gradient(to top, rgba(8, 12, 16, 0.95) 0%, rgba(8, 12, 16, 0.6) 60%, transparent 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .offers-glass-overlay h3 {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text);
+    margin-bottom: 2px;
+  }
+
+  .offers-glass-overlay p {
+    font-size: var(--fs-xs);
+    color: var(--clr-accent-lt);
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+  }
+
+  @media (max-width: 900px) {
+    .offers-wrapper {
+      grid-template-columns: 1fr;
+      padding: var(--sp-8) var(--sp-5);
+      gap: var(--sp-8);
+    }
+    
+    .offers-visual {
+      order: -1; /* Image appears first on mobile */
+    }
+
+    .special-offers::before {
+      display: none; /* Simplify background for mobile */
+    }
+  }
+
+  @media (max-width: 560px) {
+    .offers-img {
+      height: 220px;
+    }
+    .offers-desc {
+      font-size: var(--fs-sm);
+    }
+  }
+</style>
