@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'i4hcwb1h',
     dataset: 'production',
   },
+  studioHost: 'wetpets-admin',
 });
