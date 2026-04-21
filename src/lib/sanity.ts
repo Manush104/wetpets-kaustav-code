@@ -11,7 +11,7 @@
 
 import { createClient, type SanityClient } from '@sanity/client';
 
-const projectId = import.meta.env.SANITY_PROJECT_ID ?? '';
+const projectId = import.meta.env.SANITY_PROJECT_ID ?? 'i4hcwb1h';
 const dataset   = import.meta.env.SANITY_DATASET ?? 'production';
 const token     = import.meta.env.SANITY_TOKEN ?? '';
 
