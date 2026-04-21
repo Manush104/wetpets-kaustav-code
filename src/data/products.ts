@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
-  category: 'livestock' | 'tanks' | 'equipment' | 'maintenance' | 'spacial-offers';
+  category: 'livestock' | 'tanks' | 'equipment' | 'maintenance' | 'special-offers';
   subcategory: string;
   price: number;         // INR
   priceLabel?: string;   // e.g. "per pair", "onwards"
@@ -24,8 +24,8 @@ export interface CategoryGroup {
 
 export const categoryTree: CategoryGroup[] = [
   {
-    id: 'spacial-offers',
-    label: 'Spacial Offers',
+    id: 'special-offers',
+    label: 'Special Offers',
     image: '/wetpets-kaustav-code/assets/images/categories/livestock.png',
     subcategories: [
       { id: 'combo-deals',      label: 'Combo Deals' },
