@@ -33,7 +33,7 @@ export const product = defineType({
       group: 'basic',
       options: {
         list: [
-          { title: 'Special Offers', value: 'spacial-offers' },
+          { title: 'Special Offers', value: 'special-offers' },
           { title: 'Livestock (Fish & Plants)', value: 'livestock' },
           { title: 'Aquarium Tanks & Furniture', value: 'tanks' },
           { title: 'Equipment & Hardware', value: 'equipment' },

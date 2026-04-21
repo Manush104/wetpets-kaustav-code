@@ -1,4 +1,19 @@
 ---
+import { getSpecialOffers } from '../utils/sanity';
+
+// Fetch special offers from Sanity. We'll use the first active one.
+const offers = await getSpecialOffers();
+const offer = offers && offers.length > 0 ? offers[0] : null;
+
+// Fallbacks if no data in Sanity yet
+const title = offer?.title || 'Special Offers';
+const subtitle = offer?.subtitle || 'Premium Collections';
+const description = offer?.description || 'Discover our handpicked combo deals and limited-time discount coupons. Experience premium quality at unbeatable prices to bring your aquarium vision to life.';
+const badge = offer?.badge || 'Up to 30% Off';
+const ctaText = offer?.ctaText || 'Explore Deals';
+const ctaLink = offer?.ctaLink || '/wetpets-kaustav-code/products?cat=special-offers';
+// Use a safe fallback image that will always load if Sanity image is missing
+const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
 ---
 
 <section class="special-offers section" id="special-offers">
@@ -6,13 +21,11 @@
     <div class="offers-wrapper reveal">
       <div class="offers-content">
         <p class="label" style="color: var(--clr-accent-lt);">Exclusive Deals</p>
-        <h2 class="h2">Special Offers</h2>
-        <p class="offers-desc">
-          Discover our handpicked combo deals and limited-time discount coupons. Experience premium quality at unbeatable prices to bring your aquarium vision to life.
-        </p>
+        <h2 class="h2">{title}</h2>
+        <p class="offers-desc">{description}</p>
         <div class="offers-actions">
-          <a href="/wetpets-kaustav-code/products?cat=special-offers" class="btn btn--primary">
-            Explore Deals
+          <a href={ctaLink} class="btn btn--primary">
+            {ctaText}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="arrow-icon" stroke="currentColor" stroke-width="1.5">
               <path d="M4 8h8M9 5l3 3-3 3"/>
             </svg>
@@ -21,10 +34,10 @@
       </div>
       <div class="offers-visual">
         <div class="offers-glass-card">
-          <div class="offers-badge">Up to 30% Off</div>
-          <img src="/wetpets-kaustav-code/assets/images/fish/arowana.jpg" alt="Premium Arowana" class="offers-img" loading="lazy" />
+          <div class="offers-badge">{badge}</div>
+          <img src={image} alt={title} class="offers-img" loading="lazy" />
           <div class="offers-glass-overlay">
-            <h3>Premium Collections</h3>
+            <h3>{subtitle}</h3>
             <p>Discount Coupons & Combos</p>
           </div>
         </div>
