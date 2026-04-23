@@ -68,7 +68,8 @@ export async function getServices() {
     "id": _id,
     title,
     description,
-    "image": image.asset->url
+    "image": image.asset->url,
+    link
   }`;
   return await sanityClient.fetch(query);
 }

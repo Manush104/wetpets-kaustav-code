@@ -26,6 +26,12 @@ export const service = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'link',
+      title: 'Link (Product Category URL)',
+      type: 'string',
+      description: 'e.g. /products?cat=livestock',
+    }),
+    defineField({
       name: 'sortOrder',
       title: 'Sort Order',
       type: 'number',
