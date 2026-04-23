@@ -7,6 +7,11 @@ export const specialOffer = defineType({
   icon: () => '🏷️',
   fields: [
     defineField({
+      name: 'label',
+      title: 'Top Label (e.g. "Exclusive Deals")',
+      type: 'string',
+    }),
+    defineField({
       name: 'title',
       title: 'Offer Title',
       type: 'string',
@@ -15,7 +20,13 @@ export const specialOffer = defineType({
     }),
     defineField({
       name: 'subtitle',
-      title: 'Subtitle',
+      title: 'Card Heading',
+      type: 'string',
+      description: 'e.g. "Premium Collections" for the image overlay',
+    }),
+    defineField({
+      name: 'overlayText',
+      title: 'Card Subheading',
       type: 'string',
       description: 'e.g. "Discount Coupons & Combos"',
     }),

@@ -50,8 +50,10 @@ export async function getFeaturedProducts() {
 export async function getSpecialOffers() {
   const query = `*[_type == "specialOffer" && isActive == true] | order(sortOrder asc) {
     "id": _id,
+    label,
     title,
     subtitle,
+    overlayText,
     description,
     badge,
     "image": image.asset->url,

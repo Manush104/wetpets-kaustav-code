@@ -25,9 +25,9 @@ const deskStructure = (S: StructureBuilder) =>
 
       // ── Website Content ──
       S.listItem()
-        .title('⚙️ Services')
+        .title('⚙️ What We Offer (Services)')
         .schemaType('service')
-        .child(S.documentTypeList('service').title('Services')),
+        .child(S.documentTypeList('service').title('What We Offer')),
 
       S.listItem()
         .title('⭐ Customer Reviews')

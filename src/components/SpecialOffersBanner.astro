@@ -6,8 +6,10 @@ const offers = await getSpecialOffers();
 const offer = offers && offers.length > 0 ? offers[0] : null;
 
 // Fallbacks if no data in Sanity yet
+const label = offer?.label || 'Exclusive Deals';
 const title = offer?.title || 'Special Offers';
 const subtitle = offer?.subtitle || 'Premium Collections';
+const overlayText = offer?.overlayText || 'Discount Coupons & Combos';
 const description = offer?.description || 'Discover our handpicked combo deals and limited-time discount coupons. Experience premium quality at unbeatable prices to bring your aquarium vision to life.';
 const badge = offer?.badge || 'Up to 30% Off';
 const ctaText = offer?.ctaText || 'Explore Deals';
@@ -20,7 +22,7 @@ const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b
   <div class="container">
     <div class="offers-wrapper reveal">
       <div class="offers-content">
-        <p class="label" style="color: var(--clr-accent-lt);">Exclusive Deals</p>
+        <p class="label" style="color: var(--clr-accent-lt);">{label}</p>
         <h2 class="h2">{title}</h2>
         <p class="offers-desc">{description}</p>
         <div class="offers-actions">
@@ -38,7 +40,7 @@ const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b
           <img src={image} alt={title} class="offers-img" loading="lazy" />
           <div class="offers-glass-overlay">
             <h3>{subtitle}</h3>
-            <p>Discount Coupons & Combos</p>
+            <p>{overlayText}</p>
           </div>
         </div>
       </div>
