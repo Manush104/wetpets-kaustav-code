@@ -5,37 +5,37 @@ const localServices = [
   {
     title: 'Live Fish',
     desc: 'Hundreds of freshwater species — imported and locally bred. Tetras, Cichlids, Arowana, Betta, Goldfish and more.',
-    img: '/wetpets-kaustav-code/assets/images/services/service-fish.jpg',
+    img: '/assets/images/services/service-fish.jpg',
     link: '/products?cat=livestock',
   },
   {
     title: 'Aquariums & Tanks',
     desc: 'Glass and acrylic tanks from compact nano setups to large display aquariums. Custom sizes on request.',
-    img: '/wetpets-kaustav-code/assets/images/services/service-tanks.jpg',
+    img: '/assets/images/services/service-tanks.jpg',
     link: '/products?cat=tanks',
   },
   {
     title: 'Filters & Equipment',
     desc: 'Canister filters, sponge filters, heaters, air pumps, LED lights, CO₂ systems and water treatment.',
-    img: '/wetpets-kaustav-code/assets/images/services/service-equipment.jpg',
+    img: '/assets/images/services/service-equipment.jpg',
     link: '/products?cat=equipment',
   },
   {
     title: 'Plants & Decor',
     desc: 'Live aquatic plants, driftwood, rocks, substrate, and ornaments for aquascaping.',
-    img: '/wetpets-kaustav-code/assets/images/services/service-plants.jpg',
+    img: '/assets/images/services/service-plants.jpg',
     link: '/products?cat=maintenance',
   },
   {
     title: 'Fish Food & Care',
     desc: 'Flakes, pellets, frozen bloodworms, live food, medications and water conditioners.',
-    img: '/wetpets-kaustav-code/assets/images/services/service-food.jpg',
+    img: '/assets/images/services/service-food.jpg',
     link: '/products?cat=maintenance',
   },
   {
     title: 'Expert Guidance',
     desc: 'Free advice on setup, water chemistry, fish compatibility and disease treatment from our experienced team.',
-    img: '/wetpets-kaustav-code/assets/images/services/service-advice.jpg',
+    img: '/assets/images/services/service-advice.jpg',
     link: '/contact',
   },
 ];
@@ -56,7 +56,7 @@ const services = sanityServices.length > 0 ? sanityServices : localServices;
     <div class="services__grid">
       {services.map((svc, i) => {
         const Wrapper = svc.link ? 'a' : 'div';
-        const wrapperProps = svc.link ? { href: svc.link.startsWith('http') ? svc.link : `/wetpets-kaustav-code${svc.link}` } : {};
+        const wrapperProps = svc.link ? { href: svc.link.startsWith('http') ? svc.link : `${svc.link}` } : {};
         
         return (
           <Wrapper 

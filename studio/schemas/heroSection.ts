@@ -49,7 +49,7 @@ export const heroSection = defineType({
       name: 'primaryButtonLink',
       title: 'Primary Button Link',
       type: 'string',
-      initialValue: '/wetpets-kaustav-code/products',
+      initialValue: '/products',
     }),
     defineField({
       name: 'secondaryButtonText',
@@ -61,7 +61,7 @@ export const heroSection = defineType({
       name: 'secondaryButtonLink',
       title: 'Secondary Button Link',
       type: 'string',
-      initialValue: '/wetpets-kaustav-code/contact',
+      initialValue: '/contact',
     }),
     // Stats
     defineField({
