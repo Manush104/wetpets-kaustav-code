@@ -56,7 +56,7 @@ const services = sanityServices.length > 0 ? sanityServices : localServices;
     <div class="services__grid">
       {services.map((svc, i) => {
         const Wrapper = svc.link ? 'a' : 'div';
-        const wrapperProps = svc.link ? { href: svc.link.startsWith('http') ? svc.link : `/wetpets-kaustav-code${svc.link}` } : {};
+        const wrapperProps = svc.link ? { href: svc.link.startsWith('http') ? svc.link : `${svc.link}` } : {};
         
         return (
           <Wrapper 

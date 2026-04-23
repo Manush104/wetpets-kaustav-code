@@ -3,6 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://Manush104.github.io',
-  base: '/wetpets-kaustav-code',
+  site: 'https://wetpets.in', // User's custom domain or placeholder
 });

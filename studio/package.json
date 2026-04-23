@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@sanity/vision": "^5.22.0",
+    "papaparse": "^5.5.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "sanity": "^5.22.0",
     "styled-components": "^6.4.1"
   },
   "devDependencies": {
+    "@types/papaparse": "^5.5.2",
     "typescript": "^5.3.0"
   }
 }

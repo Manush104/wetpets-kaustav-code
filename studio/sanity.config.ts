@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './schemas';
 import type { StructureBuilder } from 'sanity/structure';
 import { Logo } from './components/Logo';
+import { BulkImportTool } from './components/BulkImportTool';
 
 /* ── Custom Desk Structure ────────────────────────────────── */
 const deskStructure = (S: StructureBuilder) =>
@@ -103,4 +104,13 @@ export default defineConfig({
       logo: Logo,
     },
   },
+  tools: (prev) => [
+    ...prev,
+    {
+      name: 'bulk-import',
+      title: 'Bulk Import',
+      icon: () => '📦',
+      component: BulkImportTool,
+    },
+  ],
 });
