@@ -59,7 +59,7 @@ export const specialOffer = defineType({
       name: 'ctaLink',
       title: 'Button Link',
       type: 'string',
-      initialValue: '/products?cat=special-offers',
+      initialValue: '/wetpets-kaustav-code/products?cat=special-offers',
     }),
     defineField({
       name: 'isActive',
