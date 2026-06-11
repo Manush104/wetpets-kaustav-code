@@ -183,6 +183,7 @@ export function BulkImportTool() {
       inStock: p.inStock ?? true,
       availability: p.availability ?? 'In Store',
       featured: p.featured ?? false,
+      imageUrl: p.imageUrl ?? '',
     }));
     const csv = Papa.unparse(rows);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -194,8 +195,8 @@ export function BulkImportTool() {
 
   // ── CSV Template Download ──
   const downloadTemplate = () => {
-    const header = 'name,slug,category,subcategory,price,priceLabel,description,inStock,availability,featured';
-    const example = 'Neon Tetra,neon-tetra,livestock,freshwater-fish,80,each,Bright schooling fish,true,In Store,true';
+    const header = 'name,slug,category,subcategory,price,priceLabel,description,inStock,availability,featured,imageUrl';
+    const example = 'Neon Tetra,neon-tetra,livestock,freshwater-fish,80,each,Bright schooling fish,true,In Store,true,https://example.com/neon-tetra.jpg';
     const csv = header + '\n' + example;
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const a = document.createElement('a');
@@ -249,12 +250,28 @@ export function BulkImportTool() {
         featured: String(row.featured ?? row.Featured ?? 'false').toLowerCase() === 'true',
       };
       try {
+        let finalDoc = { ...doc };
+        const imageUrl = row.imageUrl || row.ImageUrl || row.image || row.Image;
+        if (imageUrl) {
+          try {
+            const res = await fetch(imageUrl);
+            const blob = await res.blob();
+            const asset = await client.assets.upload('image', blob);
+            finalDoc.image = {
+              _type: 'image',
+              asset: { _type: 'reference', _ref: asset._id }
+            };
+          } catch (imgErr) {
+            console.warn(`Could not upload image for ${doc.name}:`, imgErr);
+          }
+        }
+
         if (row._action.includes('Update')) {
           const ex = products.find((p) => p.slug?.current === row._slug || p.name === doc.name);
-          if (ex) await client.patch(ex._id).set(doc).commit();
-          else await client.create(doc);
+          if (ex) await client.patch(ex._id).set(finalDoc).commit();
+          else await client.create(finalDoc);
         } else {
-          await client.create(doc);
+          await client.create(finalDoc);
         }
         s++;
       } catch (err: any) {
@@ -397,7 +414,7 @@ export function BulkImportTool() {
         <div style={{ padding: 12, background: '#0d0d1a', borderRadius: 6, fontSize: 12, color: '#aaa' }}>
           <strong style={{ color: '#ccc' }}>Expected CSV Headers:</strong><br />
           <code style={{ color: '#93c5fd' }}>
-            name, slug, category, subcategory, price, priceLabel, description, inStock, availability, featured
+            name, slug, category, subcategory, price, priceLabel, description, inStock, availability, featured, imageUrl
           </code>
           <br /><br />
           <strong style={{ color: '#ccc' }}>Category values:</strong> special-offers, livestock, tanks, equipment, maintenance<br />
@@ -434,6 +451,7 @@ export function BulkImportTool() {
                     <th style={S.th}>Price</th>
                     <th style={S.th}>Stock</th>
                     <th style={S.th}>Featured</th>
+                    <th style={S.th}>Image</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -446,6 +464,7 @@ export function BulkImportTool() {
                       <td style={S.td}>₹{row.price || row.Price}</td>
                       <td style={S.td}>{String(row.inStock ?? row.InStock ?? 'true')}</td>
                       <td style={S.td}>{String(row.featured ?? row.Featured ?? 'false')}</td>
+                      <td style={S.td}>{row.imageUrl || row.image ? '📸 Yes' : '—'}</td>
                     </tr>
                   ))}
                 </tbody>
