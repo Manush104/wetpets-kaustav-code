@@ -15,10 +15,9 @@ const links = [
   <div class="container nav__inner">
     <!-- Logo -->
     <a href="/" class="nav__logo" id="nav-logo">
-      <span class="nav__logo-mark">WP</span>
       <div class="nav__logo-text">
-        <span class="nav__logo-name">Wet Pets</span>
-        <span class="nav__logo-sub">Aquarium Store</span>
+        <span class="nav__logo-name">WET PETS</span>
+        <span class="nav__logo-sub">AQUARIUM STORE</span>
       </div>
     </a>
 
@@ -185,47 +184,37 @@ const links = [
     height: var(--nav-h);
   }
 
-  /* ── LOGO ──────────────────────────────────────────── */
   .nav__logo {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
     flex-shrink: 0;
-  }
-
-  .nav__logo-mark {
-    width: 34px;
-    height: 34px;
-    background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dk));
-    color: var(--clr-white);
-    font-family: var(--font-heading);
-    font-size: var(--fs-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: 0.04em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-sm);
+    text-decoration: none;
   }
 
   .nav__logo-text {
     display: flex;
     flex-direction: column;
-    line-height: 1.1;
+    line-height: 1.15;
+    gap: 1px;
   }
 
   .nav__logo-name {
     font-family: var(--font-heading);
-    font-size: var(--fs-base);
-    font-weight: var(--fw-bold);
-    color: var(--clr-text);
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
   }
 
   .nav__logo-sub {
-    font-size: 10px;
-    letter-spacing: var(--ls-wider);
+    font-family: var(--font-heading);
+    font-size: 9px;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--clr-text-dim);
+    color: #4ab3e8;
   }
 
   /* ── DESKTOP LINKS ─────────────────────────────────── */

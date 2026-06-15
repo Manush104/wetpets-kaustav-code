@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import SocialFloat from '../components/SocialFloat.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { products as localProducts, categoryTree } from '../data/products';
 import { getProducts } from '../utils/sanity';
@@ -102,7 +102,7 @@ const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
     </section>
   </main>
   <Footer />
-  <WhatsAppFloat />
+  <SocialFloat />
 </Layout>
 
 <style>

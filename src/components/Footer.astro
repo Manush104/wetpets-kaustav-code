@@ -18,10 +18,9 @@ const searchTerms = [
   <div class="container footer__top">
     <div class="footer__brand">
       <a href="/" class="footer__logo">
-        <span class="footer__logo-mark">WP</span>
         <div>
-          <p class="footer__logo-name">Wet Pets</p>
-          <p class="footer__logo-sub">Aquarium Store · Kolkata</p>
+          <p class="footer__logo-name">WET PETS</p>
+          <p class="footer__logo-sub">AQUARIUM STORE · KOLKATA</p>
         </div>
       </a>
       <p class="footer__tagline">
@@ -107,37 +106,28 @@ const searchTerms = [
   .footer__logo {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
     margin-bottom: var(--sp-5);
-  }
-
-  .footer__logo-mark {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dk));
-    color: var(--clr-white);
-    font-family: var(--font-heading);
-    font-size: var(--fs-xs);
-    font-weight: var(--fw-bold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    border-radius: var(--radius-sm);
+    text-decoration: none;
   }
 
   .footer__logo-name {
     font-family: var(--font-heading);
-    font-size: var(--fs-md);
-    font-weight: var(--fw-bold);
-    color: var(--clr-text);
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
   }
 
   .footer__logo-sub {
-    font-size: 10px;
-    letter-spacing: var(--ls-wider);
+    font-family: var(--font-heading);
+    font-size: 9px;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--clr-text-dim);
+    color: #4ab3e8;
+    margin-top: 2px;
   }
 
   .footer__tagline {
