@@ -12,14 +12,11 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { products as localProducts } from '../data/products';
+import { products as localProducts, categoryTree } from '../data/products';
 import { getProducts } from '../utils/sanity';
 
 const sanityProducts = await getProducts();
 const products = sanityProducts.length > 0 ? sanityProducts : localProducts;
-
-// Show 4 featured products on the home page
-const featured = products.filter(p => p.inStock).slice(0, 4);
 ---
 
 <Layout
@@ -30,33 +27,74 @@ const featured = products.filter(p => p.inStock).slice(0, 4);
   <main id="main-content">
     <Hero />
     <SpecialOffersBanner />
-    <About />
     <MarqueeTicker />
 
-    <!-- Featured Products -->
-    <section class="section" id="featured">
+    <!-- All Products Section (inline on home page) -->
+    <section class="section" id="products-section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="label">Featured Products</p>
+          <p class="label">Our Products</p>
           <div class="divider"></div>
-          <h2 class="h2">Popular Right Now</h2>
-          <p>A small selection from our inventory. Browse all products to see the full range.</p>
+          <h2 class="h2">Browse Our Full Range</h2>
+          <p>Fish, tanks, and accessories — all available in-store. WhatsApp or call to check availability.</p>
         </div>
 
-        <div class="featured-grid">
-          {featured.map((p, i) => (
-            <div class={`reveal${i % 4 === 1 ? ' reveal-delay-1' : i % 4 === 2 ? ' reveal-delay-2' : i % 4 === 3 ? ' reveal-delay-3' : ''}`}>
+        <!-- Category filter pills -->
+        <div class="home-cat-cards reveal" id="home-cat-cards">
+          <button class="home-cat-card active" data-cat="all">
+            <span class="home-cat-card__label">All Products</span>
+            <span class="home-cat-card__count">{products.length} items</span>
+          </button>
+          {categoryTree.map((cat) => {
+            const count = products.filter(p => p.category === cat.id).length;
+            return (
+              <button class="home-cat-card" data-cat={cat.id}>
+                <img src={cat.image} alt={cat.label} class="home-cat-card__bg" loading="lazy" />
+                <div class="home-cat-card__overlay"></div>
+                <span class="home-cat-card__label">{cat.label}</span>
+                <span class="home-cat-card__count">{count} {count === 1 ? 'item' : 'items'}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <!-- Subcategory pills (shown when a category is selected) -->
+        <div class="home-sub-filters" id="home-sub-filters" style="display: none;"></div>
+
+        <!-- Product grid -->
+        <div class="home-products-grid" id="home-products-grid">
+          {products.map((p, i) => (
+            <div
+              class={`home-product-item reveal${i % 4 === 1 ? ' reveal-delay-1' : i % 4 === 2 ? ' reveal-delay-2' : i % 4 === 3 ? ' reveal-delay-3' : ''}`}
+              data-category={p.category}
+              data-subcategory={p.subcategory}
+              id={`home-product-wrap-${p.id}`}
+            >
               <ProductCard product={p} />
             </div>
           ))}
         </div>
 
-        <div class="featured-cta reveal" style="margin-top: var(--sp-8); text-align: center;">
-          <a href="/products" class="btn btn--outline">View All Products</a>
+        <!-- Empty state -->
+        <div class="home-products-empty" id="home-products-empty" style="display: none;">
+          <p class="text-muted">No products in this category yet. Check back soon or contact us to enquire.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="reveal" style="margin-top: var(--sp-10); text-align: center;">
+          <p class="text-muted" style="margin-bottom: var(--sp-5);">Can't find what you're looking for? We source on request.</p>
+          <div style="display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap;">
+            <a href="https://wa.me/919748567217?text=Hi%2C+I%27m+looking+for+a+specific+product.+Can+you+help%3F" target="_blank" rel="noopener" class="btn btn--whatsapp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Request a Product
+            </a>
+            <a href="/contact" class="btn btn--outline">Contact Us</a>
+          </div>
         </div>
       </div>
     </section>
 
+    <About />
     <Services />
     <Reviews />
     <FAQ />
@@ -67,17 +105,225 @@ const featured = products.filter(p => p.inStock).slice(0, 4);
 </Layout>
 
 <style>
-  .featured-grid {
+  /* ── Category Cards ───────────────────────── */
+  .home-cat-cards {
+    display: flex;
+    gap: var(--sp-3);
+    overflow-x: auto;
+    padding-bottom: var(--sp-4);
+    margin-bottom: var(--sp-6);
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-border) transparent;
+  }
+  .home-cat-cards::-webkit-scrollbar { height: 4px; }
+  .home-cat-cards::-webkit-scrollbar-track { background: transparent; }
+  .home-cat-cards::-webkit-scrollbar-thumb { background-color: var(--clr-border); border-radius: var(--radius-full); }
+  .home-cat-cards::-webkit-scrollbar-thumb:hover { background-color: var(--clr-accent); }
+
+  .home-cat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    flex-shrink: 0;
+    padding: var(--sp-4) var(--sp-6);
+    min-width: 140px;
+    min-height: 90px;
+    background-color: var(--clr-surface-2);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 250ms var(--ease), transform 250ms var(--ease), box-shadow 250ms var(--ease);
+  }
+  .home-cat-card:hover { border-color: var(--clr-border-2); transform: translateY(-2px); }
+  .home-cat-card.active { border-color: var(--clr-accent); box-shadow: 0 0 20px rgba(74, 159, 216, 0.1); }
+
+  .home-cat-card__bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.15;
+    transition: opacity 400ms var(--ease), transform 600ms var(--ease); z-index: 0;
+  }
+  .home-cat-card:hover .home-cat-card__bg { opacity: 0.25; transform: scale(1.08); }
+  .home-cat-card.active .home-cat-card__bg { opacity: 0.2; }
+
+  .home-cat-card__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(8,12,16,0.2) 0%, rgba(8,12,16,0.7) 100%); z-index: 1;
+  }
+  .home-cat-card__label {
+    font-family: var(--font-heading); font-size: var(--fs-xs); font-weight: var(--fw-semi);
+    color: var(--clr-text); text-align: center; white-space: nowrap; position: relative; z-index: 2;
+  }
+  .home-cat-card__count { font-size: 10px; color: var(--clr-text-dim); letter-spacing: var(--ls-wide); position: relative; z-index: 2; }
+
+  /* ── Subcategory filters ──────────────────── */
+  .home-sub-filters {
+    display: flex;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+    padding-bottom: var(--sp-6);
+    justify-content: center;
+    animation: fadeSlideIn 300ms var(--ease) forwards;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sub-filter buttons (dynamically injected by JS) */
+  :global(.home-sub-filters .sub-filter-btn) {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-wide);
+    padding: var(--sp-3) var(--sp-6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    color: var(--clr-text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  :global(.home-sub-filters .sub-filter-btn:hover) {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--clr-white);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  :global(.home-sub-filters .sub-filter-btn.active) {
+    background: linear-gradient(135deg, var(--clr-accent), #2b6cb0);
+    border-color: transparent;
+    color: var(--clr-white);
+    font-weight: var(--fw-semi);
+    box-shadow: 0 8px 20px rgba(74, 159, 216, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* ── Product Grid ─────────────────────────── */
+  .home-products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--sp-3);
   }
+  .home-product-item { transition: opacity var(--dur-base), transform var(--dur-base); }
+  .home-product-item.hidden { display: none; }
+  .home-products-empty { text-align: center; padding: var(--sp-16) 0; }
 
   @media (max-width: 1100px) {
-    .featured-grid { grid-template-columns: repeat(2, 1fr); }
+    .home-products-grid { grid-template-columns: repeat(3, 1fr); }
   }
-
-  @media (max-width: 560px) {
-    .featured-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+  @media (max-width: 768px) {
+    .home-products-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+    .home-cat-card { min-width: 110px; min-height: 75px; padding: var(--sp-2); }
+    .home-cat-card__label { font-size: 11px; white-space: normal; line-height: 1.2; }
+  }
+  @media (max-width: 480px) {
+    .home-products-grid { gap: var(--sp-1); }
   }
 </style>
+
+<script>
+  const CATEGORY_TREE: Record<string, { label: string; id: string }[]> = {
+    'special-offers': [
+      { id: 'combo-deals', label: 'Combo Deals' },
+      { id: 'discount-coupons', label: 'Discount Coupons' },
+    ],
+    livestock: [
+      { id: 'freshwater-fish', label: 'Freshwater Fish' },
+      { id: 'marine-fish', label: 'Marine Fish' },
+      { id: 'shrimp-inverts', label: 'Shrimp & Invertebrates' },
+      { id: 'live-plants', label: 'Live Aquatic Plants' },
+      { id: 'livestock-variants', label: 'Livestock Variants' },
+    ],
+    tanks: [
+      { id: 'starter-kits', label: 'Starter Kits' },
+      { id: 'specialty-tanks', label: 'Specialty Tanks' },
+      { id: 'stands-cabinetry', label: 'Stands & Cabinetry' },
+    ],
+    equipment: [
+      { id: 'filtration', label: 'Filtration Systems' },
+      { id: 'lighting', label: 'Lighting' },
+      { id: 'heaters-thermo', label: 'Heaters & Thermometers' },
+      { id: 'air-pumps-wave', label: 'Air Pumps & Wave Makers' },
+      { id: 'co2-systems', label: 'CO₂ Systems' },
+    ],
+    maintenance: [
+      { id: 'fish-food', label: 'Fish Food' },
+      { id: 'water-conditioners', label: 'Water Conditioners' },
+      { id: 'fertilizers', label: 'Fertilizers' },
+      { id: 'substrates-decor', label: 'Substrates & Decor' },
+    ],
+  };
+
+  const catCards   = document.querySelectorAll<HTMLButtonElement>('.home-cat-card');
+  const items      = document.querySelectorAll<HTMLElement>('.home-product-item');
+  const empty      = document.getElementById('home-products-empty')!;
+  const subFilters = document.getElementById('home-sub-filters')!;
+
+  let currentCat = 'all';
+  let currentSub = 'all';
+
+  catCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      catCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      currentCat = card.dataset.cat!;
+      currentSub = 'all';
+      renderSubFilters(currentCat);
+      filterProducts();
+    });
+  });
+
+  function renderSubFilters(cat: string) {
+    if (cat === 'all' || !CATEGORY_TREE[cat]) {
+      subFilters.style.display = 'none';
+      return;
+    }
+    const subs = CATEGORY_TREE[cat];
+    subFilters.style.display = 'flex';
+    subFilters.style.animation = 'none';
+    subFilters.offsetHeight;
+    subFilters.style.animation = '';
+    subFilters.innerHTML = `<button class="sub-filter-btn active" data-sub="all">All</button>`;
+    subs.forEach((s) => {
+      const btn = document.createElement('button');
+      btn.className = 'sub-filter-btn';
+      btn.dataset.sub = s.id;
+      btn.textContent = s.label;
+      subFilters.appendChild(btn);
+    });
+    subFilters.querySelectorAll<HTMLButtonElement>('.sub-filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        subFilters.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSub = btn.dataset.sub!;
+        filterProducts();
+      });
+    });
+  }
+
+  function filterProducts() {
+    let visible = 0;
+    items.forEach((item) => {
+      const matchCat = currentCat === 'all' || item.dataset.category === currentCat;
+      const matchSub = currentSub === 'all' || item.dataset.subcategory === currentSub;
+      const show = matchCat && matchSub;
+      item.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    if (visible === 0) {
+      empty.style.display = 'block';
+    } else {
+      empty.style.display = 'none';
+    }
+  }
+</script>
