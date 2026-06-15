@@ -58,12 +58,12 @@ const fbUrl = 'https://www.facebook.com/wetpetskolkata/';
 <style>
   .social-float {
     position: fixed;
-    right: var(--sp-5);
+    right: 16px;
     bottom: var(--sp-6);
     z-index: 90;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-2);
+    gap: 10px;
     align-items: flex-end;
   }
 
@@ -71,8 +71,8 @@ const fbUrl = 'https://www.facebook.com/wetpetskolkata/';
     display: flex;
     align-items: center;
     gap: var(--sp-2);
-    width: 44px;
-    height: 44px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     color: #fff;
     justify-content: center;
@@ -88,8 +88,8 @@ const fbUrl = 'https://www.facebook.com/wetpetskolkata/';
   }
 
   .sf-btn:hover {
-    width: 140px;
-    border-radius: 22px;
+    width: 148px;
+    border-radius: 25px;
     transform: translateY(-2px);
   }
 
@@ -113,35 +113,37 @@ const fbUrl = 'https://www.facebook.com/wetpetskolkata/';
   /* WhatsApp */
   .sf-btn--wa {
     background-color: #25d366;
-    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 4px 18px rgba(37,211,102,0.4);
   }
   .sf-btn--wa:hover {
     background-color: #20bd5a;
-    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.55);
+    box-shadow: 0 6px 24px rgba(37,211,102,0.55);
   }
 
   /* Instagram */
   .sf-btn--insta {
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
-    box-shadow: 0 4px 18px rgba(214, 36, 159, 0.35);
+    box-shadow: 0 4px 18px rgba(214,36,159,0.35);
   }
   .sf-btn--insta:hover {
-    box-shadow: 0 6px 24px rgba(214, 36, 159, 0.5);
+    box-shadow: 0 6px 24px rgba(214,36,159,0.5);
   }
 
   /* Facebook */
   .sf-btn--fb {
     background-color: #1877f2;
-    box-shadow: 0 4px 18px rgba(24, 119, 242, 0.35);
+    box-shadow: 0 4px 18px rgba(24,119,242,0.35);
   }
   .sf-btn--fb:hover {
     background-color: #166fe5;
-    box-shadow: 0 6px 24px rgba(24, 119, 242, 0.5);
+    box-shadow: 0 6px 24px rgba(24,119,242,0.5);
   }
 
+  /* Mobile — keep small, no label expand */
   @media (max-width: 480px) {
+    .social-float { right: 12px; bottom: var(--sp-4); gap: 8px; }
     .sf-btn { width: 40px; height: 40px; }
-    .sf-btn:hover { width: 40px; border-radius: 50%; }
+    .sf-btn:hover { width: 40px; border-radius: 50%; transform: none; }
     .sf-btn__label { display: none; }
   }
 </style>

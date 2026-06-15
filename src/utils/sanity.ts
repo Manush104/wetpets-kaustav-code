@@ -18,6 +18,7 @@ export async function getProducts() {
     subcategory,
     price,
     priceLabel,
+    discountPercent,
     "image": image.asset->url,
     description,
     inStock,
@@ -59,6 +60,18 @@ export async function getSpecialOffers() {
     "image": image.asset->url,
     ctaText,
     ctaLink
+  }`;
+  return await sanityClient.fetch(query);
+}
+
+export async function getSpecialOfferProducts() {
+  const query = `*[_type == "product" && category == "special-offers"] | order(sortOrder asc, _createdAt desc) {
+    "id": _id,
+    name,
+    subcategory,
+    price,
+    discountPercent,
+    inStock
   }`;
   return await sanityClient.fetch(query);
 }

@@ -1,26 +1,48 @@
 ---
-import { getSpecialOffers } from '../utils/sanity';
+import { getSpecialOffers, getSpecialOfferProducts } from '../utils/sanity';
 
-// Fetch special offers from Sanity. We'll use the first active one.
 const offers = await getSpecialOffers();
 const offer = offers && offers.length > 0 ? offers[0] : null;
 
-// Fallbacks if no data in Sanity yet
-const label = offer?.label || 'Exclusive Deals';
-const title = offer?.title || 'Special Offers';
-const subtitle = offer?.subtitle || 'Premium Collections';
-const overlayText = offer?.overlayText || 'Discount Coupons & Combos';
-const description = offer?.description || 'Discover our handpicked combo deals and limited-time discount coupons. Experience premium quality at unbeatable prices to bring your aquarium vision to life.';
-const badge = offer?.badge || 'Up to 30% Off';
-const ctaText = offer?.ctaText || 'Explore Deals';
-const ctaLink = offer?.ctaLink || '/products?cat=special-offers';
-// Use a safe fallback image that will always load if Sanity image is missing
-const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+// Fetch special offer products from Sanity
+const offerProducts = await getSpecialOfferProducts();
+
+// Split into LIVESTOCK and DRY subcategories
+// livestock subcategories: freshwater-fish, marine-fish, shrimp-inverts, live-plants, livestock-variants, combo-deals
+// dry goods: discount-coupons, equipment, maintenance etc.
+const livestockSubs = ['freshwater-fish','marine-fish','shrimp-inverts','live-plants','livestock-variants','combo-deals'];
+const livestockOffers = offerProducts.filter((p: any) => livestockSubs.includes(p.subcategory));
+const dryOffers = offerProducts.filter((p: any) => !livestockSubs.includes(p.subcategory));
+
+// Fallbacks
+const label      = offer?.label       || 'Exclusive Deals';
+const title      = offer?.title       || 'Special Offers';
+const description = offer?.description || 'Discover our handpicked combo deals and limited-time discount coupons.';
+const badge      = offer?.badge       || 'Up to 30% Off';
+const ctaText    = offer?.ctaText     || 'Explore Deals';
+const ctaLink    = offer?.ctaLink     || '/products?cat=special-offers';
+const image      = offer?.image       || 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+
+// Fallback products if Sanity has none yet
+const fallbackLivestock = [
+  { id: '1', name: 'Neon Tetra', discountPercent: 20 },
+  { id: '2', name: 'Guppy Pair', discountPercent: 15 },
+  { id: '3', name: 'Discus Fish', discountPercent: 25 },
+];
+const fallbackDry = [
+  { id: '4', name: 'Sponge Filter', discountPercent: 10 },
+  { id: '5', name: 'Fish Food Combo', discountPercent: 30 },
+  { id: '6', name: 'Aquarium Lights', discountPercent: 18 },
+];
+
+const liveSlide  = livestockOffers.length > 0 ? livestockOffers : fallbackLivestock;
+const drySlide   = dryOffers.length > 0 ? dryOffers : fallbackDry;
 ---
 
 <section class="special-offers section" id="special-offers">
   <div class="container">
     <div class="offers-wrapper reveal">
+      <!-- Left: text content -->
       <div class="offers-content">
         <p class="label" style="color: var(--clr-accent-lt);">{label}</p>
         <h2 class="h2">{title}</h2>
@@ -34,13 +56,62 @@ const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b
           </a>
         </div>
       </div>
+
+      <!-- Right: glass card with fish image + sliding offers -->
       <div class="offers-visual">
         <div class="offers-glass-card">
+          <!-- Badge -->
           <div class="offers-badge">{badge}</div>
+
+          <!-- Fish background image (low opacity) -->
           <img src={image} alt={title} class="offers-img" loading="lazy" />
-          <div class="offers-glass-overlay">
-            <h3>{subtitle}</h3>
-            <p>{overlayText}</p>
+
+          <!-- Dark overlay -->
+          <div class="offers-card-overlay"></div>
+
+          <!-- Slider sits on top of image -->
+          <div class="offers-slider" id="offers-slider">
+            <!-- Slide 1: LIVESTOCK -->
+            <div class="offers-slide active" data-slide="0">
+              <div class="slide-header">
+                <span class="slide-tag slide-tag--live">🐟 LIVESTOCK</span>
+                <span class="slide-dots">
+                  <span class="slide-dot active" data-dot="0"></span>
+                  <span class="slide-dot" data-dot="1"></span>
+                </span>
+              </div>
+              <ul class="slide-items">
+                {liveSlide.map((p: any) => (
+                  <li class="slide-item">
+                    <span class="slide-item__name">{p.name}</span>
+                    {p.discountPercent && (
+                      <span class="slide-item__discount">{p.discountPercent}% OFF</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Slide 2: DRY -->
+            <div class="offers-slide" data-slide="1">
+              <div class="slide-header">
+                <span class="slide-tag slide-tag--dry">📦 DRY GOODS</span>
+                <span class="slide-dots">
+                  <span class="slide-dot" data-dot="0"></span>
+                  <span class="slide-dot active" data-dot="1"></span>
+                </span>
+              </div>
+              <ul class="slide-items">
+                {drySlide.map((p: any) => (
+                  <li class="slide-item">
+                    <span class="slide-item__name">{p.name}</span>
+                    {p.discountPercent && (
+                      <span class="slide-item__discount">{p.discountPercent}% OFF</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -56,41 +127,33 @@ const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b
     overflow: hidden;
   }
 
-  /* Soft gradient background blending with the dark theme */
   .special-offers::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(74, 159, 216, 0.08) 0%, rgba(8, 12, 16, 0) 70%);
+    top: 50%; left: 10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(74,159,216,0.08) 0%, rgba(8,12,16,0) 70%);
     transform: translateY(-50%);
-    border-radius: 50%;
-    z-index: 0;
-    pointer-events: none;
+    border-radius: 50%; z-index: 0; pointer-events: none;
   }
 
   .offers-wrapper {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1.1fr;
     gap: var(--sp-12);
     align-items: center;
-    background: rgba(18, 24, 32, 0.4);
-    border: 1px solid rgba(74, 159, 216, 0.1);
+    background: rgba(18,24,32,0.4);
+    border: 1px solid rgba(74,159,216,0.1);
     border-radius: var(--radius-lg);
     padding: var(--sp-12);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
 
   .offers-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
+    display: flex; flex-direction: column; gap: var(--sp-4);
   }
 
   .offers-desc {
@@ -99,122 +162,224 @@ const image = offer?.image || 'https://images.unsplash.com/photo-1524704654690-b
     font-size: var(--fs-md);
   }
 
-  .offers-actions {
-    margin-top: var(--sp-2);
-  }
+  .offers-actions { margin-top: var(--sp-2); }
 
   .btn--primary .arrow-icon {
     margin-left: 6px;
     transition: transform 300ms var(--ease);
   }
+  .btn--primary:hover .arrow-icon { transform: translateX(4px); }
 
-  .btn--primary:hover .arrow-icon {
-    transform: translateX(4px);
-  }
-
+  /* ── Visual card ─── */
   .offers-visual {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative; display: flex;
+    justify-content: center; align-items: center;
   }
 
   .offers-glass-card {
     position: relative;
-    width: 100%;
-    max-width: 450px;
+    width: 100%; max-width: 460px;
+    height: 320px;
     border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: transform 400ms var(--ease);
-  }
-
-  .offers-glass-card:hover {
-    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
   }
 
   .offers-img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.9) contrast(1.1);
-    transition: filter 400ms var(--ease), transform 600ms var(--ease);
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    opacity: 0.22;
+    filter: brightness(0.7) saturate(0.6);
   }
 
-  .offers-glass-card:hover .offers-img {
-    filter: brightness(1) contrast(1.1);
-    transform: scale(1.05);
+  .offers-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(8,12,16,0.55) 0%, rgba(8,12,16,0.82) 100%);
+    z-index: 1;
   }
 
   .offers-badge {
-    position: absolute;
-    top: var(--sp-4);
-    right: var(--sp-4);
+    position: absolute; top: var(--sp-4); right: var(--sp-4);
     background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dk));
     color: var(--clr-white);
-    font-family: var(--font-heading);
-    font-size: var(--fs-xs);
+    font-family: var(--font-heading); font-size: var(--fs-xs);
     font-weight: var(--fw-bold);
     padding: var(--sp-1) var(--sp-3);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-full); z-index: 3;
+    box-shadow: 0 4px 12px rgba(74,159,216,0.3);
+    letter-spacing: var(--ls-wide); text-transform: uppercase;
+  }
+
+  /* ── Slider ─────────────────────────────────── */
+  .offers-slider {
+    position: absolute; inset: 0;
     z-index: 2;
-    box-shadow: 0 4px 12px rgba(74, 159, 216, 0.3);
-    letter-spacing: var(--ls-wide);
-    text-transform: uppercase;
+    display: flex; flex-direction: column;
   }
 
-  .offers-glass-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--sp-6) var(--sp-5) var(--sp-4);
-    background: linear-gradient(to top, rgba(8, 12, 16, 0.95) 0%, rgba(8, 12, 16, 0.6) 60%, transparent 100%);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  .offers-slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: var(--sp-5);
+    opacity: 0;
+    transition: opacity 500ms ease;
+    pointer-events: none;
   }
 
-  .offers-glass-overlay h3 {
+  .offers-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Tag header */
+  .slide-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-3);
+  }
+
+  .slide-tag {
     font-family: var(--font-heading);
-    font-size: var(--fs-lg);
-    font-weight: var(--fw-bold);
-    color: var(--clr-text);
-    margin-bottom: 2px;
-  }
-
-  .offers-glass-overlay p {
     font-size: var(--fs-xs);
-    color: var(--clr-accent-lt);
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-wider);
     text-transform: uppercase;
-    letter-spacing: var(--ls-wide);
+    padding: 3px var(--sp-3);
+    border-radius: var(--radius-full);
   }
 
+  .slide-tag--live {
+    background: rgba(37,211,102,0.15);
+    border: 1px solid rgba(37,211,102,0.35);
+    color: #4ade80;
+  }
+
+  .slide-tag--dry {
+    background: rgba(251,191,36,0.15);
+    border: 1px solid rgba(251,191,36,0.35);
+    color: #fbbf24;
+  }
+
+  /* Dots */
+  .slide-dots {
+    display: flex; gap: 5px; align-items: center;
+  }
+
+  .slide-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: background 300ms, transform 300ms;
+    cursor: pointer;
+  }
+
+  .slide-dot.active {
+    background: var(--clr-accent);
+    transform: scale(1.3);
+  }
+
+  /* Product list */
+  .slide-items {
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: var(--sp-2);
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .slide-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-2) var(--sp-3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: background 200ms;
+  }
+
+  .slide-item:hover {
+    background: rgba(74,159,216,0.1);
+    border-color: rgba(74,159,216,0.25);
+  }
+
+  .slide-item__name {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--clr-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
+  }
+
+  .slide-item__discount {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-wider);
+    color: #4ade80;
+    background: rgba(37,211,102,0.12);
+    border: 1px solid rgba(37,211,102,0.2);
+    padding: 2px 6px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Responsive */
   @media (max-width: 900px) {
     .offers-wrapper {
       grid-template-columns: 1fr;
       padding: var(--sp-8) var(--sp-5);
       gap: var(--sp-8);
     }
-    
-    .offers-visual {
-      order: -1; /* Image appears first on mobile */
-    }
-
-    .special-offers::before {
-      display: none; /* Simplify background for mobile */
-    }
+    .offers-visual { order: -1; }
+    .special-offers::before { display: none; }
   }
 
   @media (max-width: 560px) {
-    .offers-img {
-      height: 220px;
-    }
-    .offers-desc {
-      font-size: var(--fs-sm);
-    }
+    .offers-img { height: 260px; }
+    .offers-desc { font-size: var(--fs-sm); }
+    .slide-item__name { font-size: 12px; }
   }
 </style>
+
+<script>
+  const slides = document.querySelectorAll<HTMLElement>('.offers-slide');
+  const allDots = document.querySelectorAll<HTMLElement>('.slide-dot');
+
+  let current = 0;
+  const total = slides.length;
+
+  function goTo(idx: number) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[idx].classList.add('active');
+    current = idx;
+
+    // Update all dots across both slides
+    allDots.forEach(dot => {
+      dot.classList.toggle('active', parseInt(dot.dataset.dot!) === current);
+    });
+  }
+
+  // Init
+  goTo(0);
+
+  // Auto-slide every 3.5 seconds
+  setInterval(() => {
+    goTo((current + 1) % total);
+  }, 3500);
+
+  // Click dots to manually navigate
+  allDots.forEach(dot => {
+    dot.addEventListener('click', () => goTo(parseInt(dot.dataset.dot!)));
+  });
+</script>

@@ -95,6 +95,14 @@ export const product = defineType({
       description: 'e.g. "each", "per pair", "onwards"',
     }),
     defineField({
+      name: 'discountPercent',
+      title: 'Discount % Off',
+      type: 'number',
+      group: 'pricing',
+      description: 'e.g. 20 for 20% off. Leave empty if no discount. Client can change this anytime.',
+      validation: (r) => r.min(0).max(100),
+    }),
+    defineField({
       name: 'image',
       title: 'Product Image',
       type: 'image',
