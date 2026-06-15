@@ -6,4 +6,7 @@ export default defineCliConfig({
     dataset: 'production',
   },
   studioHost: 'wetpets-admin',
+  deployment: {
+    appId: 'f60hli4rf5ha6r9fk62w7fwh',
+  },
 });
